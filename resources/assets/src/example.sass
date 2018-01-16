@@ -1,0 +1,142 @@
+#leads_a1auto
+  [v-cloak]
+    display: none !important
+
+  input.form-control,
+  button
+    padding: 6px !important
+    height: auto !important
+
+  div.vdp-datepicker .input-group
+    width: 100% !important
+    input[disabled]
+      cursor: pointer !important
+
+  .dropdown.v-select ul.dropdown-menu
+    max-height: 200px !important
+
+  .v-select
+    cursor: pointer !important
+    .dropdown-toggle
+      display: flex !important
+      flex-wrap: wrap
+      border-radius: 0 !important
+
+  .has-error .dropdown.v-select .dropdown-toggle
+    border-color: #fd1a42 !important
+
+  .v-select .dropdown-toggle span.selected-tag
+    background: none !important
+    border: none !important
+
+  .v-select input[type=search],
+  .v-select input[type=search]:focus
+    flex-basis: 20px
+    flex-grow: 1
+    height: 33px
+    padding: 0 20px 0 10px
+    width: 100% !important
+
+  .dropdown.v-select.open.searchable span.selected-tag
+    display: none !important
+
+  ul.meta.text-muted
+    display: none
+
+  div.vdp-datepicker div.input-group
+    width: 100%
+
+  div.vdp-datepicker div.input-group input.form-control
+    background-color: white
+    cursor: pointer
+    min-width: 100% !important
+
+  div.vdp-datepicker div.vdp-datepicker__calendar
+    width: 292px !important
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.5)
+    top: -75px
+    left: auto
+    right: 0
+    border-radius: 6px
+    padding: 5px
+
+  span.prev, span.next, div.vdp-datepicker header span.up
+    border-radius: 6px
+
+  div.vdp-datepicker span.cell.day-header,
+  div.vdp-datepicker span.cell.day
+    margin: 2px
+    line-height: 36px
+    max-height: 36px
+    max-width: 36px
+    border-radius: 100%
+    transition: 0.1s all ease-in-out
+
+  div.vdp-datepicker span.cell.day-header
+    height: auto !important
+    line-height: 1
+
+  div.vdp-datepicker div.vdp-datepicker__calendar header span.up
+    font-weight: bold
+
+  span.cell.day.selected
+    color: white
+    font-weight: bold
+
+  div.vdp-datepicker div.input-group input.form-control
+    width: 100% !important
+  button
+    .glyphicon
+      font-size: 0.84em
+
+    .glyphicon-spin
+      transform-origin: calc(0.5em - 0.01em) calc(0.55em - 0.09em)
+      animation: glyphiconSpin 1000ms infinite linear
+
+  @keyframes glyphiconSpin
+    0%
+      -webkit-transform: rotate(0deg)
+      transform: rotate(0deg)
+
+    100%
+      -webkit-transform: rotate(359deg)
+      transform: rotate(359deg)
+
+  input[type="radio"]
+    display: none
+  input[type="radio"] + label
+    cursor: pointer !important
+    position: relative
+    margin: 0 5px
+    &::before
+      content: ""
+      border: 2px solid #444
+      border-radius: 100%
+      width: 30px
+      height: 30px
+      vertical-align: middle
+      margin: 0 5px 0 0
+      display: inline-block
+      opacity: 0.3 !important
+    &::after
+      content: ""
+      top: 5px
+      left: 5px
+      width: 20px
+      height: 20px
+      position: absolute
+      display: inline-block
+      border-radius: 100%
+      background-color: #444
+      transition: all 330ms ease-in-out
+      opacity: 0.3 !important
+
+  input[type="radio"]:checked
+    & + label::after
+      transform: scale(1)
+      background-color: #277fe2
+      opacity: 1 !important
+
+    & + label::before
+      border: 2px solid #277fe2
+
