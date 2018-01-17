@@ -24,7 +24,10 @@ https://github.com/bayareawebpro/wp-lumen-plugin-framework/wiki
 
 Api Docs: https://cdn.rawgit.com/bayareawebpro/wp-lumen-plugin-framework/99bc7e1c/_docs/build/index.html
 
+## Slack Chat
+https://join.slack.com/t/wplumen/shared_invite/enQtMzAwNDgwMDQzODI3LWFlOTJmMWMxYjA2ZTE0YjRhMDk0N2QwZDJjZWZmYTEzODcxZWRiZWVlODQwNTE1ZjgxZjAzMjcyNzg3NGJjNjg
+
 ## How to Contribute
 
-Make a pull-request or open a new issue with a link to a gist snippet.  I'll be happy to adapt to everyone's needs.
+Make a pull-request or open a new issue with a link to a gist snippet.
 https://github.com/bayareawebpro/wp-lumen-plugin-framework/issues
