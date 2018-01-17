@@ -47,6 +47,6 @@ return [
     |
     */
 
-    'prefix' => 'lumen_cache',
+    'prefix' => 'wplumen_cache',
 
 ];

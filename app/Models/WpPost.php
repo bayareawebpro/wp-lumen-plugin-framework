@@ -180,7 +180,7 @@ class WpPost extends Model {
 	}
 
 	/**
-	 * Model Callbacks
+	 * Model Callbacks - Set additional WP_POST dates
 	 */
 	protected static function boot() {
 		parent::boot();

@@ -14,6 +14,7 @@ return [
 	|
 	*/
 	'driver' => 'file',
+
 	/*
 	|--------------------------------------------------------------------------
 	| Session Lifetime
@@ -69,7 +70,7 @@ return [
 	| provided for you; however, you are free to change this as needed.
 	|
 	*/
-	'table' => 'sessions',
+	'table' => 'wplumen_sessions',
 	/*
 	|--------------------------------------------------------------------------
 	| Session Cache Store

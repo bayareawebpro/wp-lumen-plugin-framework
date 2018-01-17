@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>App\Helpers\WpHelper | WP Lumen Plugin Framework Documentation</title>
+
+            <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/sami.css">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/typeahead.min.js"></script>
+        <script src="../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+    
+    </head>
+
+    <body id="class" data-name="class:App_Helpers_WpHelper" data-root-path="../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../index.html">WP Lumen Plugin Framework Documentation</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../classes.html">Classes</a></li>
+                                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../traits.html">Traits</a></li>
+                    <li><a href="../../doc-index.html">Index</a></li>
+                    <li><a href="../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                        <li><a href="../../App.html">App</a></li><li class="backslash">\</li><li><a href="../../App/Helpers.html">Helpers</a></li><li class="backslash">\</li><li>WpHelper</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>
+            WpHelper
+                
+        </h1>
+    </div>
+
+    <p>    class
+    <strong>WpHelper</strong>
+</p>
+
+        
+    
+
+    
+    
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_app">
+                                        protected                                        
+                </td>
+                <td>$app</td>
+                <td class="last"></td>
+                <td></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>($app)
+        
+                                            <p>Add Admin Notice</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addMenuLink">addMenuLink</a>(<abbr title="App\Helpers\[int]">[int]</abbr> $page_id, <abbr title="App\Helpers\[str]">[str]</abbr> $page_title, <abbr title="App\Helpers\[int]">[int]</abbr> $menu_id, <abbr title="App\Helpers\[int]">[int]</abbr> $parent = 0)
+        
+                                            <p>Adds Page to a WordPress navmenu</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    void
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addPluginLinks">addPluginLinks</a>(array $plugin_links = array())
+        
+                                            <p>Add Admin Notice</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addShortcode">addShortcode</a>($tag, <a target="_blank" href="http://php.net/Closure">Closure</a> $closure)
+        
+                                            <p>Add Shortcode</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    void
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addAdminNotice">addAdminNotice</a>(<a target="_blank" href="http://php.net/Closure">Closure</a> $closure)
+        
+                                            <p>Add Admin Notice</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addMetaBox">addMetaBox</a>(string $id, string $title, <a target="_blank" href="http://php.net/Closure">Closure</a> $closure, string $screen = &#039;post&#039;, string $context = &#039;normal&#039;, string $priority = &#039;default&#039;, integer $closure_args = 1)
+        
+                                            <p>Add Shortcode</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addWidget">addWidget</a>(string $class)
+        
+                                            <p>Add Widget</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addDashboardWidget">addDashboardWidget</a>(string $id, string $name, string $closure)
+        
+                                            <p>Add Widget</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addAdminPanel">addAdminPanel</a>($menu_slug, $menu_title, $page_title, $closure, $capability = array(&#039;manage_options&#039;))
+        
+                                            <p>Add Admin Panel</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addAdminSubPanel">addAdminSubPanel</a>($parent_slug, $menu_slug, $menu_title, $page_title, $closure, $capability = array(&#039;manage_options&#039;))
+        
+                                            <p>Add Admin Panel</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addAction">addAction</a>($action, <a target="_blank" href="http://php.net/Closure">Closure</a> $closure, $priority = 10, $closure_arguments = 0)
+        
+                                            <p>Add Action</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addAdminBarNode">addAdminBarNode</a>($parent = false, $id, $title, $href, $group = false, $meta = array())
+        
+                                            <p>Add Admin Bar Node</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_enqueueStyle">enqueueStyle</a>(string $handle, string $src, array $dependencies = array(), string $version = &#039;1.0.0&#039;, string $media = &#039;all&#039;)
+        
+                                            <p>Enqueue Style</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_enqueueScript">enqueueScript</a>(string $handle, string $src, array $dependencies = array(), string $version = &#039;1.0.0&#039;, boolean $inFooter = true)
+        
+                                            <p>Enqueue Script</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    object
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getGlobalPost">getGlobalPost</a>()
+        
+                                            <p>Get Wp Global Post Object</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getWpDatabaseConnection">getWpDatabaseConnection</a>()
+        
+                                            <p>Get WP Database</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at         line 10</div>
+        <code>                    
+    <strong>__construct</strong>($app)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add Admin Notice</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$app</td>
+                <td>\Illuminate\Contracts\Foundation\Application</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addMenuLink">
+        <div class="location">at         line 21</div>
+        <code>                    
+    <strong>addMenuLink</strong>(<abbr title="App\Helpers\[int]">[int]</abbr> $page_id, <abbr title="App\Helpers\[str]">[str]</abbr> $page_title, <abbr title="App\Helpers\[int]">[int]</abbr> $menu_id, <abbr title="App\Helpers\[int]">[int]</abbr> $parent = 0)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Adds Page to a WordPress navmenu</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="App\Helpers\[int]">[int]</abbr></td>
+                <td>$page_id</td>
+                <td>The ID of the page you want to add</td>
+            </tr>
+                    <tr>
+                <td><abbr title="App\Helpers\[str]">[str]</abbr></td>
+                <td>$page_title</td>
+                <td>Title of menu item</td>
+            </tr>
+                    <tr>
+                <td><abbr title="App\Helpers\[int]">[int]</abbr></td>
+                <td>$menu_id</td>
+                <td>NavMenu ID</td>
+            </tr>
+                    <tr>
+                <td><abbr title="App\Helpers\[int]">[int]</abbr></td>
+                <td>$parent</td>
+                <td>(Optional) Menu item Parent ID</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addPluginLinks">
+        <div class="location">at         line 37</div>
+        <code>                    void
+    <strong>addPluginLinks</strong>(array $plugin_links = array())
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add Admin Notice</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$plugin_links</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addShortcode">
+        <div class="location">at         line 57</div>
+        <code>                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+    <strong>addShortcode</strong>($tag, <a target="_blank" href="http://php.net/Closure">Closure</a> $closure)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add Shortcode</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$tag</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/Closure">Closure</a></td>
+                <td>$closure</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addAdminNotice">
+        <div class="location">at         line 67</div>
+        <code>                    void
+    <strong>addAdminNotice</strong>(<a target="_blank" href="http://php.net/Closure">Closure</a> $closure)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add Admin Notice</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/Closure">Closure</a></td>
+                <td>$closure</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addMetaBox">
+        <div class="location">at         line 82</div>
+        <code>                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+    <strong>addMetaBox</strong>(string $id, string $title, <a target="_blank" href="http://php.net/Closure">Closure</a> $closure, string $screen = &#039;post&#039;, string $context = &#039;normal&#039;, string $priority = &#039;default&#039;, integer $closure_args = 1)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add Shortcode</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$id</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$title</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/Closure">Closure</a></td>
+                <td>$closure</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$screen</td>
+                <td>post|page|custom_postType.,</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$context</td>
+                <td>normal|side|advanced,</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$priority</td>
+                <td>default|high|low,</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$closure_args</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addWidget">
+        <div class="location">at         line 107</div>
+        <code>                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+    <strong>addWidget</strong>(string $class)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add Widget</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$class</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addDashboardWidget">
+        <div class="location">at         line 123</div>
+        <code>                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+    <strong>addDashboardWidget</strong>(string $id, string $name, string $closure)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add Widget</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$id</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$name</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$closure</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addAdminPanel">
+        <div class="location">at         line 147</div>
+        <code>                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+    <strong>addAdminPanel</strong>($menu_slug, $menu_title, $page_title, $closure, $capability = array(&#039;manage_options&#039;))
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add Admin Panel</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$menu_slug</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$menu_title</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$page_title</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$closure</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$capability</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addAdminSubPanel">
+        <div class="location">at         line 171</div>
+        <code>                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+    <strong>addAdminSubPanel</strong>($parent_slug, $menu_slug, $menu_title, $page_title, $closure, $capability = array(&#039;manage_options&#039;))
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add Admin Panel</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$parent_slug</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$menu_slug</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$menu_title</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$page_title</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$closure</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$capability</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addAction">
+        <div class="location">at         line 193</div>
+        <code>                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+    <strong>addAction</strong>($action, <a target="_blank" href="http://php.net/Closure">Closure</a> $closure, $priority = 10, $closure_arguments = 0)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add Action</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$action</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/Closure">Closure</a></td>
+                <td>$closure</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$priority</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$closure_arguments</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addAdminBarNode">
+        <div class="location">at         line 206</div>
+        <code>                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+    <strong>addAdminBarNode</strong>($parent = false, $id, $title, $href, $group = false, $meta = array())
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add Admin Bar Node</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$parent</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$id</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$title</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$href</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$group</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$meta</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_enqueueStyle">
+        <div class="location">at         line 230</div>
+        <code>                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+    <strong>enqueueStyle</strong>(string $handle, string $src, array $dependencies = array(), string $version = &#039;1.0.0&#039;, string $media = &#039;all&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Enqueue Style</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$handle</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$src</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$dependencies</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$version</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$media</td>
+                <td>[all|screen|print]</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_enqueueScript">
+        <div class="location">at         line 246</div>
+        <code>                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
+    <strong>enqueueScript</strong>(string $handle, string $src, array $dependencies = array(), string $version = &#039;1.0.0&#039;, boolean $inFooter = true)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Enqueue Script</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$handle</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$src</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$dependencies</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$version</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>boolean</td>
+                <td>$inFooter</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getGlobalPost">
+        <div class="location">at         line 258</div>
+        <code>                    object
+    <strong>getGlobalPost</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get Wp Global Post Object</p>                                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>object</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getWpDatabaseConnection">
+        <div class="location">at         line 267</div>
+        <code>        static            array
+    <strong>getWpDatabaseConnection</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get WP Database</p>                                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>

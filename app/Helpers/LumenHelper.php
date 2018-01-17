@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Bus\Dispatcher;
-
 class LumenHelper {
 
 	private $app;
@@ -28,7 +27,7 @@ class LumenHelper {
 	 * @return LumenHelper
 	 */
 	public static function plugin($namespace){
-		return new self(isset(self::$app_instances[$namespace]) ? self::$app_instances[$namespace] : null);
+		return new self($namespace);
 	}
 
 	/**

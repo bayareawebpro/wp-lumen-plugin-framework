@@ -10,4 +10,5 @@ storage/debugbar/*
 storage/framework/cache/*
 storage/framework/sessions/*
 storage/framework/views/*
-.idea/vcs.xml
+sami.config.php
+_docs/cache

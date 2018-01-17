@@ -34,7 +34,7 @@ return [
         ],
         'database' => [
             'driver' => 'database',
-            'table' => 'jobs',
+            'table' => 'wplumen_jobs',
             'queue' => 'default',
             'retry_after' => 60,
         ],
@@ -53,7 +53,7 @@ return [
 
     'failed' => [
         'database' => 'mysql',
-        'table' => 'failed_jobs',
+        'table' => 'wplumen_failed_jobs',
     ],
 
 ];

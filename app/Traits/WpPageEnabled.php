@@ -2,8 +2,7 @@
 trait WpPageEnabled{
 
 	/**
-	 * Set WP Page Title when Loading A Custom Route & Template
-	 * Override 404 in Addition
+	 * Set WP Page Title & Silence 404s
 	 * @param  string  $pageTitle
 	 * @return void
 	 */

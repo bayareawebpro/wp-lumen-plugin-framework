@@ -48,9 +48,8 @@ $app = new Laravel\Lumen\Application(
 
 $app->withEloquent();
 
-
 //Facades will not work with multiple WP-Lumen Plugins Running, use the Helper instead.
-//$app->withFacades(true);
+//$app->withFacades();
 
 /*
 |--------------------------------------------------------------------------
@@ -82,10 +81,9 @@ $app->singleton(
 |
 */
 
-$app->middleware([
-	\Illuminate\Session\Middleware\StartSession::class,
-]);
 
+//$app->middleware([
+//]);
 
 $app->routeMiddleware([
 	'auth' => App\Http\Middleware\Authenticate::class,
@@ -113,12 +111,16 @@ $app->bind(\Illuminate\Session\SessionManager::class, function ($app) {
 	return new \Illuminate\Session\SessionManager($app);
 });
 $app->register(\Illuminate\Session\SessionServiceProvider::class);
+$app->middleware([
+	\Illuminate\Session\Middleware\StartSession::class,
+]);
 
 // Add DebugBar ServiceProvider
 $app->register(App\Providers\DebugbarServiceProvider::class);
 
 // Add Wordpress ServiceProvider
 $app->register(App\Providers\WordpressServiceProvider::class);
+
 
 /*
 |--------------------------------------------------------------------------

@@ -1,14 +1,14 @@
-<?php namespace App;
+<?php namespace App\Utilities;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
-class WpUnInstall{
+class UnInstall{
 
     protected $this;
 
     /**
      * Class Initialization called by Hook (Requires Static Method)
-     * @return WpUnInstall
+     * @return UnInstall
      */
     public static function init()
     {
@@ -21,8 +21,8 @@ class WpUnInstall{
      */
     public function __construct()
     {
-        $this->schema();
-        $this->data();
+//        $this->schema();
+//        $this->data();
     }
 
     /**

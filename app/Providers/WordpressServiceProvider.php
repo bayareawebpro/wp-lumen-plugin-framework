@@ -6,7 +6,7 @@ class WordpressServiceProvider extends ServiceProvider
 	/** @var \App\Helpers\LumenHelper $lumenHelper **/
 	/** @var \App\Helpers\WpHelper $wpHelper **/
 
-	private $wpHelper, $lumenHelper;
+	private $wpHelper, $lumenHelper, $absolutePath;
 
 	/**
 	 * WordpressServiceProvider constructor.
@@ -16,6 +16,7 @@ class WordpressServiceProvider extends ServiceProvider
 		parent::__construct( $app );
 		$this->lumenHelper = $this->app->make('lumenHelper');
 		$this->wpHelper = $this->lumenHelper->wpHelper();
+		$this->absolutePath = realpath(__DIR__.'/../plugin.php');
 	}
 
 	/**
@@ -23,30 +24,21 @@ class WordpressServiceProvider extends ServiceProvider
      * @return void
      */
     public function register(){
-
-    }
-
-	/**
-	 * Boot the service providers
-	 */
-	public function boot(){
-
-
 	    /** Add Plugin Links to Admin > Plugins Page Entry **/
-		$this->wpHelper
+	    $this->wpHelper
 		    ->addPluginLinks(array(
-		        '<a target="_blank" href="http://bayareawebpro.com">Developer</a>',
-	        ));
+			    '<a target="_blank" href="http://bayareawebpro.com">Developer</a>',
+		    ));
 
 
 	    /** Add FrontEnd Widget **/
-		$this->wpHelper
+	    $this->wpHelper
 		    ->addWidget(
-		    \App\Widgets\ExampleFrontEndWidget::class
-	        );
+			    \App\Widgets\ExampleFrontEndWidget::class
+		    );
 
 	    /** Add Admin Bar Nodes **/
-		$this->wpHelper
+	    $this->wpHelper
 		    ->addAdminBarNode(
 			    false,
 			    'lumen_bar_node2',
@@ -70,11 +62,11 @@ class WordpressServiceProvider extends ServiceProvider
 		    );
 
 	    /** Add Shortcodes **/
-		$this->wpHelper
+	    $this->wpHelper
 		    ->addShortcode(
 			    'auth_register',
 			    function ($parameters, $content){
-				   return $this->app->call( '\App\Http\Controllers\Auth\RegisterShortcodeController@template', compact('parameters', 'content'));
+				    return $this->app->call( '\App\Http\Controllers\Auth\RegisterShortcodeController@template', compact('parameters', 'content'));
 			    }
 		    )
 		    ->addShortcode(
@@ -86,22 +78,22 @@ class WordpressServiceProvider extends ServiceProvider
 
 
 	    /** Add MetaBoxes **/
-		$this->wpHelper
+	    $this->wpHelper
 		    ->addMetaBox(
-		    'example_meta_box',
-		    'Example Meta Box',
+			    'example_meta_box',
+			    'Example Meta Box',
 			    function ($post, $metabox_attributes){
 				    $this->lumenHelper
 					    ->response($this->app->call( '\App\Http\Controllers\ExampleMetaBoxController@template', compact('post', 'metabox_attributes')))
 					    ->sendContent();
 			    },
-		    'post',
-		    'normal',
-		    'default',
-		    2
-	        )
+			    'post',
+			    'normal',
+			    'default',
+			    2
+		    )
 		    ->addAction(
-		    	'save_post',
+			    'save_post',
 			    function ($post_id, $post, $update){
 				    if($post->post_type == 'post') {
 					    $this->app->make('cache')->flush();
@@ -114,7 +106,7 @@ class WordpressServiceProvider extends ServiceProvider
 
 
 	    /** Add Nav Menu MetaBoxes **/
-		$this->wpHelper->addMetaBox(
+	    $this->wpHelper->addMetaBox(
 		    'example_menu_meta_box',
 		    'Wp-Lumen',
 		    function ( $object, $arguments){
@@ -131,46 +123,46 @@ class WordpressServiceProvider extends ServiceProvider
 
 
 	    /** Add Dashboard Widget **/
-		$this->wpHelper
+	    $this->wpHelper
 		    ->addDashboardWidget(
-				'example_admin_widget',
-				'Example Admin Widget',
-				function(){
-					$this->lumenHelper
-						->response($this->app->call( '\App\Widgets\ExampleAdminWidget@template'))
-						->sendContent();
-				}
-	        );
+			    'example_admin_widget',
+			    'Example Admin Widget',
+			    function(){
+				    $this->lumenHelper
+					    ->response($this->app->call( '\App\Widgets\ExampleAdminWidget@template'))
+					    ->sendContent();
+			    }
+		    );
 
 	    /** Add Dashboard Panels **/
-		$this->wpHelper
+	    $this->wpHelper
 		    ->addAdminPanel(
-				'lumen_page',
-				'WP-Lumen',
-				'WP-Lumen',
+			    'lumen_page',
+			    'WP-Lumen',
+			    'WP-Lumen',
 			    function(){
 				    $this->lumenHelper
 					    ->response($this->lumenHelper->view('admin-intro'))
 					    ->sendContent();
 			    },
-				'read'
-	        )
-			->addAdminSubPanel(
-				'lumen_page',
-				'lumen_sub_page',
-				'WP-Lumen SubPage',
-				'WP-Lumen SubPage',
-				function(){
-					$this->lumenHelper
-						->response($this->app->call( '\App\Http\Controllers\ExampleAdminController@template'))
-						->sendContent();
-				},
-				'read'
-			);
+			    'read'
+		    )
+		    ->addAdminSubPanel(
+			    'lumen_page',
+			    'lumen_sub_page',
+			    'WP-Lumen SubPage',
+			    'WP-Lumen SubPage',
+			    function(){
+				    $this->lumenHelper
+					    ->response($this->app->call( '\App\Http\Controllers\ExampleAdminController@template'))
+					    ->sendContent();
+			    },
+			    'read'
+		    );
 
 
 	    /** Add CSS & Scripts **/
-		$this->wpHelper
+	    $this->wpHelper
 		    ->enqueueStyle(
 			    'lumen',
 			    $this->lumenHelper->asset('resources/assets/build/example.css'),
@@ -185,6 +177,15 @@ class WordpressServiceProvider extends ServiceProvider
 			    '1.0.0',
 			    true
 		    );
+
+    }
+
+	/**
+	 * Boot the service providers
+	 */
+	public function boot(){
+
+
 
     }
 }
