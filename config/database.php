@@ -57,7 +57,7 @@ return [
     |
     */
 
-    'migrations' => 'migrations',
+    'migrations' => 'wplumen_migrations',
 
 
 ];

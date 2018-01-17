@@ -16,18 +16,16 @@ class UtilityServiceProvider extends ServiceProvider
 		parent::__construct( $app );
 		$this->lumenHelper = $this->app->make('lumenHelper');
 		$this->wpHelper = $this->lumenHelper->wpHelper();
-		$this->absolutePath = realpath(__DIR__.'/../plugin.php');
+		$this->absolutePath = realpath(__DIR__.'/../../plugin.php');
 	}
-
 
 	/**
 	 * Hook Schema Into Activate, DeActivate & UnInstall
 	 * (Allows Schema Class Usage)
 	 */
-    public function register(){
-	    register_activation_hook($this->absolutePath, array(__NAMESPACE__.'\Utilities\Activate', 'init'));
-	    register_deactivation_hook($this->absolutePath, array(__NAMESPACE__.'\Utilities\DeActivate', 'init'));
-	    register_uninstall_hook($this->absolutePath, array(__NAMESPACE__.'\Utilities\UnInstall', 'init'));
+    public function boot(){
+		register_activation_hook($this->absolutePath, array('\App\Utilities\Activate', 'init'));
+		register_deactivation_hook($this->absolutePath, array('\App\Utilities\DeActivate', 'init'));
+		register_uninstall_hook($this->absolutePath, array('\App\Utilities\UnInstall', 'init'));
     }
-
 }

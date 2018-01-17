@@ -1,8 +1,8 @@
 <?php namespace App\Utilities;
-use App\Helpers\LumenHelper;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class DeActivate{
 
@@ -33,21 +33,11 @@ class DeActivate{
      */
     public function schema()
     {
-	    if($this->app->config()->get('session.enabled') && $this->app->config()->get('session.driver') == 'database'){
-		    Schema::dropIfExists($this->app->config()->get('session.table'));
-	    }
 
-	    if($this->app->config()->get('cache.enabled') && $this->app->config()->get('cache.default') == 'database'){
-		    Schema::dropIfExists($this->app->config()->get('cache.stores.database.table'));
-	    }
-
-	    if($this->app->config()->get('queue.enabled') && $this->app->config()->get('queue.default') == 'database'){
-		    Schema::dropIfExists($this->app->config()->get('queue.connections.database.table'));
-		    Schema::dropIfExists($this->app->config()->get('queue.failed.table'));
-	    }
     }
+
     /**
-     * Process Misc Data
+     * Process Database Data
      */
     public function data()
     {

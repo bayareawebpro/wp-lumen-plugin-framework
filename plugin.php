@@ -23,14 +23,6 @@
 | of the application / container and bootstraps the application so it
 | is ready to receive HTTP / Console requests from the environment.
 */
-register_activation_hook(realpath(__FILE__), array('\App\Utilities\Activate', 'init'));
-register_deactivation_hook(realpath(__FILE__), array('\App\Utilities\DeActivate', 'init'));
-register_uninstall_hook(realpath(__FILE__), array('\App\Utilities\UnInstall', 'init'));
-
 require_once __DIR__.'/bootstrap/app.php';
-add_action('init',function(){
 
-	//Resolve the Framework Helper for your Namespace:
-	//$lumenHelper = \App\Helpers\LumenHelper::plugin('App');
-
-});
+//dd(\App\Helpers\LumenHelper::plugin('App')->config());

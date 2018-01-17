@@ -16,8 +16,9 @@ class DebugbarServiceProvider extends ServiceProvider
     public function register()
     {
 	    if(env('APP_DEBUG')) {
+		    $this->app->alias('Debugbar', 'Barryvdh\Debugbar\Facade'); //optional
 		    $this->app->register(\Barryvdh\Debugbar\LumenServiceProvider::class);
-
+		    $this->app->configure('debugbar');
 		    $this->debugBar = $this->app->makeWith('debugbar', array(
 			    'request' => $this->helper->request(),
 			    'response' => $this->helper->response()
@@ -37,24 +38,7 @@ class DebugbarServiceProvider extends ServiceProvider
 
 	    }
     }
-	private function renderHeader(){
-		$this->assetRenderer = $this->debugBar->getJavascriptRenderer(site_url(), '/');
-		$this->assetRenderer->setEnableJqueryNoConflict(false);
-		$this->assetRenderer->setIncludeVendors(true);
-		$this->assetRenderer->setBaseUrl(site_url());
-		?>
-		<style type="text/css">
-			<?php $this->assetRenderer->dumpCssAssets(); ?>
-		</style>
-		<? echo str_replace('/wp-admin', '', $this->assetRenderer->renderHead());
-	}
-	private function renderFooter(){
-		?>
-		<script type="text/javascript">
-			<?php $this->assetRenderer->dumpJsAssets(); ?>
-		</script>
-		<? echo $this->assetRenderer->render();
-	}
+
 	public function boot()
 	{
 		if(env('APP_DEBUG')) {
@@ -72,5 +56,25 @@ class DebugbarServiceProvider extends ServiceProvider
 				             $this->renderFooter();
 			             }, 100 );
 		}
+	}
+
+	private function renderHeader(){
+		$this->assetRenderer = $this->debugBar->getJavascriptRenderer(site_url(), '/');
+		$this->assetRenderer->setEnableJqueryNoConflict(false);
+		$this->assetRenderer->setIncludeVendors(true);
+		$this->assetRenderer->disableVendor('jquery');
+		?>
+		<style type="text/css">
+			<?php $this->assetRenderer->dumpCssAssets(); ?>
+		</style>
+		<?
+		echo $this->assetRenderer->renderHead();
+	}
+	private function renderFooter(){
+		?>
+		<script type="text/javascript">
+			<?php $this->assetRenderer->dumpJsAssets(); ?>
+		</script>
+		<? echo $this->assetRenderer->render();
 	}
 }

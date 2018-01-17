@@ -33,8 +33,9 @@ class AppServiceProvider extends ServiceProvider
 
 	public function boot()
 	{
-		$helper = $this->app->make('lumenHelper');
-		$helper->loadConfigurations();
+		foreach($this->app->make('files')->files(realpath(__DIR__.'/../../config/')) as $configFile){
+			$this->app->configure($configFile->getBasename('.php'));
+		}
 	}
     public function provides() {
 	    return ['lumenHelper', 'wpHelper'];

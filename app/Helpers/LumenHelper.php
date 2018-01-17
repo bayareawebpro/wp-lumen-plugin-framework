@@ -10,10 +10,16 @@ class LumenHelper {
 	/**
 	 * Construct Get Plugin Container from Static Array
 	 * @param $app \Illuminate\Contracts\Foundation\Application
+	 * @throws \Exception
 	 */
 	public function __construct($app) {
 
-		$namespace = rtrim($app->getNamespace(), '\\');
+		$namespace = $app->make('config')->get('app.namespace');
+
+		if(empty($namespace)){
+			throw new \Exception('Plugin namespace has not been set in config/app.php');
+		}
+
 		if(!isset(self::$app_instances[$namespace])){
 			$this->app = self::$app_instances[$namespace] = $app;
 		}else{
@@ -24,10 +30,13 @@ class LumenHelper {
 	/**
 	 * Get Lumen Plugin Instance
 	 * @param $namespace
-	 * @return LumenHelper
+	 * @return mixed
 	 */
 	public static function plugin($namespace){
-		return new self($namespace);
+		if(isset(self::$app_instances[$namespace])){
+			return new self(self::$app_instances[$namespace]);
+		}
+		return false;
 	}
 
 	/**
@@ -137,17 +146,6 @@ class LumenHelper {
 	function dispatch($job)
 	{
 		return $this->app->make(Dispatcher::class)->dispatch($job);
-	}
-
-	/**
-	 * Dispatch a job to its appropriate handler.
-	 * @return void
-	 */
-	function loadConfigurations()
-	{
-		foreach($this->app->get('files')->files(realpath(__DIR__.'/../../config/')) as $configFile){
-			$this->app->configure($configFile->getBasename('.php'));
-		}
 	}
 
 	/**

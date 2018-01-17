@@ -21,21 +21,23 @@ class UnInstall{
      */
     public function __construct()
     {
-//        $this->schema();
-//        $this->data();
+        $this->schema();
+        $this->data();
     }
 
     /**
-     * Modify Database Schema
+     * Remove Database Schema
      */
     private function schema()
     {
 
+//	    Artisan::call('migrate:rollback');
+//	    Schema::dropIfExists('wp_migrations');
 
     }
 
     /**
-     * Remove Misc Data
+     * Remove Data
      */
     private function data()
     {
