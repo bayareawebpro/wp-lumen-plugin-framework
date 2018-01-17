@@ -103,6 +103,31 @@ $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
 $app->register(App\Providers\UtilityServiceProvider::class);
 
+
+if(!$app->runningInConsole()){
+	if($app->make('config')->get('session.enabled')){
+		$app->bind(\Illuminate\Session\SessionManager::class, function ($app) {
+			return new \Illuminate\Session\SessionManager($app);
+		});
+		$app->register(\Illuminate\Session\SessionServiceProvider::class);
+		$app->middleware([\Illuminate\Session\Middleware\StartSession::class]);
+	}
+
+	$app->register(App\Providers\WordpressServiceProvider::class);
+	$app->register(App\Providers\DebugbarServiceProvider::class);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Include WP CleanUp Mods
+|--------------------------------------------------------------------------
+| Here we will register all of the application's WP modifications.
+*/
+//$files = $app->make('files');
+//$files->requireOnce(realpath(__DIR__.'/../cleanup/head.php'));
+//$files->requireOnce(realpath(__DIR__.'/../cleanup/rest-api.php'));
+//$files->requireOnce(realpath(__DIR__.'/../cleanup/emojis.php'));
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
@@ -113,28 +138,8 @@ $app->register(App\Providers\UtilityServiceProvider::class);
 */
 add_action('init',function() use ($app){
 
-	/*
-	|--------------------------------------------------------------------------
-	| Include WP CleanUp Mods
-	|--------------------------------------------------------------------------
-	| Here we will register all of the application's WP modifications.
-	*/
-	//$files = $app->make('files');
-	//$files->requireOnce(realpath(__DIR__.'/../cleanup/head.php'));
-	//$files->requireOnce(realpath(__DIR__.'/../cleanup/rest-api.php'));
-	//$files->requireOnce(realpath(__DIR__.'/../cleanup/emojis.php'));
 
 
-	if(!$app->runningInConsole()){
-
-		$app->bind(\Illuminate\Session\SessionManager::class, function ($app) {
-			return new \Illuminate\Session\SessionManager($app);
-		});
-		$app->register(\Illuminate\Session\SessionServiceProvider::class);
-		$app->middleware([\Illuminate\Session\Middleware\StartSession::class]);
-		$app->register(App\Providers\WordpressServiceProvider::class);
-		$app->register(App\Providers\DebugbarServiceProvider::class);
-	}
 
 	$request = Illuminate\Http\Request::capture();
 
