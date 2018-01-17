@@ -168,6 +168,7 @@ add_action('init',function() use ($app){
 			//Send Response During Template Redirect
 			add_action('template_redirect',function() use ($app, $request, $response){
 				if($response->content()){
+					$response->send();
 					exit($response->status());
 				}
 			}, 1);

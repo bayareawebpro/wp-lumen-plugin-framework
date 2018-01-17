@@ -10,6 +10,6 @@ class ExampleAdminWidget {
 	}
 
 	public function template(){
-		return $this->helper->view('widgets.admin-widget');
+		return $this->helper->view('widgets.widget');
 	}
 }

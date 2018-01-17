@@ -32,6 +32,7 @@ class ExampleFrontEndWidget extends \WP_Widget {
 		$request = $this->helper->request();
 		$currentPost = $this->helper->wpHelper()->getGlobalPost();
 
+		echo $this->helper->view('widgets.widget');
 	}
 
 	public function update( $new_instance, $old_instance ) {
