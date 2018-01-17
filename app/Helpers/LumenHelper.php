@@ -23,11 +23,11 @@ class LumenHelper {
 	}
 
 	/**
-	 * Get Lumen App
+	 * Get Lumen Plugin Instance
 	 * @param $namespace
 	 * @return LumenHelper
 	 */
-	public static function getInstance($namespace){
+	public static function plugin($namespace){
 		return new self(isset(self::$app_instances[$namespace]) ? self::$app_instances[$namespace] : null);
 	}
 

@@ -1,4 +1,19 @@
 <?php
+
+/*
+|--------------------------------------------------------------------------
+| Bootstrap WP for Artisan
+|--------------------------------------------------------------------------
+*/
+
+try {
+	if(!class_exists('Laravel\Lumen\Application')){
+		require_once(realpath(__DIR__."/../../../../wp-load.php"));
+	}
+} catch (Exception $e) {
+	exit('Wp-Lumen: Laravel\Lumen\Application Class not found.  Check wp-load.php path in bootstrap/app.php (17)');
+}
+
 /*
 |--------------------------------------------------------------------------
 | Require The Composer AutoLoader
@@ -6,22 +21,6 @@
 | Loaded in mu-plugins or, include here.
 */
 require_once __DIR__.'/../vendor/autoload.php';
-
-
-/*
-|--------------------------------------------------------------------------
-| Bootstrap WP & Autoloader for Artisan
-|--------------------------------------------------------------------------
-*/
-try {
-	if(!class_exists('Laravel\Lumen\Application')){
-		//require_once(realpath(__DIR__."/../../../../wp-load.php"));
-		require_once(realpath(__DIR__."/../../../../wp-load.php"));
-	}
-} catch (Exception $e) {
-	exit('Wp-Lumen: Laravel\Lumen\Application Class not found.  Check wp-load.php path in bootstrap/app.php (17)');
-}
-
 
 /*
 |--------------------------------------------------------------------------
@@ -48,8 +47,10 @@ $app = new Laravel\Lumen\Application(
 );
 
 $app->withEloquent();
-//$app->withFacades(true);
 
+
+//Facades will not work with multiple WP-Lumen Plugins Running, use the Helper instead.
+//$app->withFacades(true);
 
 /*
 |--------------------------------------------------------------------------
@@ -114,14 +115,14 @@ $app->bind(\Illuminate\Session\SessionManager::class, function ($app) {
 $app->register(\Illuminate\Session\SessionServiceProvider::class);
 
 // Add DebugBar ServiceProvider
-//$app->register(App\Providers\DebugbarServiceProvider::class);
+$app->register(App\Providers\DebugbarServiceProvider::class);
 
 // Add Wordpress ServiceProvider
 $app->register(App\Providers\WordpressServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
-| Include WP Mods
+| Include WP CleanUp Mods
 |--------------------------------------------------------------------------
 | Here we will register all of the application's WP modifications.
 */
@@ -139,39 +140,38 @@ $app->register(App\Providers\WordpressServiceProvider::class);
 | the application. This will provide all of the URLs the application
 | can respond to, as well as the controllers that may handle them.
 */
+
 $request = Illuminate\Http\Request::capture();
+$response = $app->handle($request);
 
 if(!is_admin()){
 
+	//Boot Router for Front-end Requests
 	$app->router->group([
 		'namespace' => 'App\Http\Controllers',
 	], function ($router) {
 		require __DIR__.'/../routes/web.php';
 	});
 
-	if($app->make('config')->get('router.loading') == 'eager'){  //Load before WP
-		$response = $app->handle($request);
+	//Send Response by Overwriting WP (eager)
+	if($app->make('config')->get('router.loading') == 'eager'){
 
 		if($response->content()){
 			$response->send();
 			exit($response->status());
 		}
 
-	}elseif(is_404()){ //Load after WP
+	//Load on 404 (lazy)
+	}elseif(is_404()){
 
-		//Start Router During Template Redirect
-		add_action('template_redirect',function() use ($app, $request){
-			$response = $app->handle($request);
-
+		//Send Response During Template Redirect
+		add_action('template_redirect',function() use ($app, $request, $response){
 			if($response->content()){
 				$response->send();
 				exit($response->status());
 			}
 		}, 1);
 	}
-}else{
-	$app->handle($request);
-
 }
 
 return $app;

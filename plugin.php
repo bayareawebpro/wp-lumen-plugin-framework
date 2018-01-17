@@ -5,7 +5,7 @@
  * @package           bayareawebpro/wp-lumen-plugin-framework
  * @wordpress-plugin
  *
- * Plugin Name:       WP Lumen
+ * Plugin Name:       WP Lumen Plugin Framework
  * Plugin URI:        https://github.com/bayareawebpro/wp-lumen-plugin-framework/
  * Description:       (Lumen Framework 5.5)
  * Version:           1.0
@@ -26,4 +26,8 @@
 
 add_action('init',function(){
 	require __DIR__.'/bootstrap/app.php';
+
+	//Resolve the Framework Helper for your Namespace:
+	//$lumenHelper = \App\Helpers\LumenHelper::plugin('App');
+
 });

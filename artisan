@@ -1,9 +1,6 @@
 #!/usr/bin/env php
 <?php
 
-use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Console\Output\ConsoleOutput;
-
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -16,6 +13,9 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 */
 
 $app = require __DIR__.'/bootstrap/app.php';
+
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 /*
 |--------------------------------------------------------------------------
