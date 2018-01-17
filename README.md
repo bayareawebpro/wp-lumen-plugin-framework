@@ -19,5 +19,5 @@ https://github.com/bayareawebpro/wp-lumen-plugin-framework/wiki
 
 ## How to Contribute
 
-Make pull-requests or open a new issue with a link to a gist snippet.  I'll be happy to adapt to everyone's needs.
-https://github.com/bayareawebpro/wp-lumen-plugin-framework/wiki
+Make a pull-request or open a new issue with a link to a gist snippet.  I'll be happy to adapt to everyone's needs.
+https://github.com/bayareawebpro/wp-lumen-plugin-framework/issues
