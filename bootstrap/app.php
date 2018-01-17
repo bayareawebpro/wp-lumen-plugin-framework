@@ -15,6 +15,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 */
 try {
 	if(!class_exists('Laravel\Lumen\Application')){
+		//require_once(realpath(__DIR__."/../../../../wp-load.php"));
 		require_once(realpath(__DIR__."/../../../../wp-load.php"));
 	}
 } catch (Exception $e) {

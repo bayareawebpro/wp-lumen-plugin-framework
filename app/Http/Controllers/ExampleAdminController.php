@@ -35,7 +35,7 @@ class ExampleAdminController extends Controller
 	    }
 
 	    //Get Paginated Data from Database
-	    $this->post = $this->post->paginate($items = 10, $columns = ['*'], $pageName = 'users_page', $this->request->get('users_page'))->setPath($this->request->url());
+	    $this->post = $this->post->orderBy('post_title', $this->request->get('lumen_nonce'))->paginate($items = 1, $columns = ['*'], $pageName = 'users_page', $this->request->get('users_page'))->setPath($this->request->url());
 
 
 	    //Append Current Admin Page Slug
@@ -44,7 +44,7 @@ class ExampleAdminController extends Controller
 			    'page'=> $this->request->get('page')
 		    ));
 	    }
-	    echo $this->helper->view('admin-page', array(
+	    echo $this->helper->view('admin-page-posts', array(
 		    'posts'=>$this->post,
 		    'request'=>$this->request,
 	    ));

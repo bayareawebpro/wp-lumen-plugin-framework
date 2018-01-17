@@ -48,6 +48,14 @@ class WpPost extends Model {
 	}
 
 	/**
+	 * Post Author Relationship
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function author(){
+		return $this->belongsTo(WpUser::class, 'post_author','ID');
+	}
+
+	/**
 	 * Post Children Relationship
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */

@@ -21,7 +21,7 @@ class RegisterShortcodeController extends Controller
 	    $this->request = $this->helper->request();
     }
 
-	public function doShortcode(){
+	public function template(){
 		return $this->helper->view('auth.register', array('user' =>$this->request->user()));
 	}
 

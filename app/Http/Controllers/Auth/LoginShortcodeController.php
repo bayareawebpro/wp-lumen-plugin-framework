@@ -20,8 +20,7 @@ class LoginShortcodeController extends Controller
 	    $this->request = $this->helper->request();
     }
 
-    public function doShortcode(){
+    public function template(){
 	    return $this->helper->view('auth.login', array('user' =>$this->request->user()));
     }
-
 }

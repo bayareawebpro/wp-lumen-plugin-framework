@@ -4,6 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 class WpPostMeta extends Model {
     protected $table = 'postmeta';
     public $timestamps = false;
+    public $fillable = ['meta_key', 'meta_value'];
 
     public static function boot()
     {
@@ -19,7 +20,7 @@ class WpPostMeta extends Model {
         });
     }
     public function post(){
-        $this->hasOne(WpPost::class,'ID', 'post_id');
+        $this->belongsTo(WpPost::class,'ID', 'post_id');
     }
 
 	public function getMetaValueAttribute($value){

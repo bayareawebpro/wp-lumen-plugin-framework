@@ -63,11 +63,15 @@ class WordpressServiceProvider extends ServiceProvider
 	    $wpHelper
 		    ->addShortcode(
 			    'auth_register',
-			    \App\Http\Controllers\Auth\RegisterShortcodeController::class
+			    function ($parameters, $content) use ($lumenHelper){
+				   return $this->app->call( '\App\Http\Controllers\Auth\RegisterShortcodeController@template', compact('parameters', 'content'));
+			    }
 		    )
 		    ->addShortcode(
 			    'auth_login',
-			    \App\Http\Controllers\Auth\LoginShortcodeController::class
+			    function ($parameters, $content) use ($lumenHelper){
+				    return $this->app->call( '\App\Http\Controllers\Auth\LoginShortcodeController@template', compact('parameters', 'content'));
+			    }
 		    );
 
 
@@ -78,7 +82,7 @@ class WordpressServiceProvider extends ServiceProvider
 		    'Example Meta Box',
 			    function ($post, $metabox_attributes) use ($lumenHelper){
 				    $lumenHelper
-					    ->response($this->app->call( '\App\Http\Controllers\ExampleMetaBoxController@show', compact('post', 'metabox_attributes')))
+					    ->response($this->app->call( '\App\Http\Controllers\ExampleMetaBoxController@template', compact('post', 'metabox_attributes')))
 					    ->sendContent();
 			    },
 		    'post',
@@ -136,7 +140,7 @@ class WordpressServiceProvider extends ServiceProvider
 				'WP-Lumen',
 			    function() use ($lumenHelper){
 				    $lumenHelper
-					    ->response($this->app->call( '\App\Http\Controllers\ExampleAdminController@template'))
+					    ->response($lumenHelper->view('admin-intro'))
 					    ->sendContent();
 			    },
 				'read'

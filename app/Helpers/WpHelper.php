@@ -29,7 +29,6 @@ class WpHelper {
 	}
 
 
-
 	/**
 	 * Add Admin Notice
 	 * @param array $plugin_links
@@ -55,22 +54,8 @@ class WpHelper {
 	 * @param string $class
 	 * @return self
 	 */
-	public function addShortcode($tag, $class){
-		add_shortcode($tag, function($attributes = array(), $content = null) use ($class) {
-
-			$shortcode_attributes = array();
-			$shortcode_attributes['parameters'] = $attributes;
-			$shortcode_attributes['content'] = $content;
-
-			$this->app->when($class)
-			          ->needs('$shortcode_attributes')
-			          ->give(function() use ($shortcode_attributes){
-				          return $shortcode_attributes;
-			          });
-
-			return $this->app->make($class)->doShortcode();
-
-		});
+	public function addShortcode($tag, \Closure $closure){
+		add_shortcode($tag,$closure);
 		return $this;
 	}
 
