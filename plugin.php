@@ -25,7 +25,7 @@
 */
 
 add_action('init',function(){
-	require __DIR__.'/bootstrap/app.php';
+	require_once __DIR__.'/bootstrap/app.php';
 
 	//Resolve the Framework Helper for your Namespace:
 	//$lumenHelper = \App\Helpers\LumenHelper::plugin('App');

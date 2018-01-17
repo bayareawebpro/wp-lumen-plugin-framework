@@ -2,7 +2,7 @@
 use Illuminate\Support\ServiceProvider;
 class DebugbarServiceProvider extends ServiceProvider
 {
-	private $debugbar, $helper;
+	private $debugBar, $helper, $assetRenderer;
 
 	public function __construct($app)
 	{
@@ -10,65 +10,67 @@ class DebugbarServiceProvider extends ServiceProvider
 
 		$this->app = $app;
 		$this->helper = $this->app->make('lumenHelper');
-		$this->debugbar = null;
+		$this->debugBar = null;
 	}
 
     public function register()
     {
-	    if (env('APP_DEBUG')) {
+	    if(env('APP_DEBUG')) {
 		    $this->app->register(\Barryvdh\Debugbar\LumenServiceProvider::class);
 
-		    $this->debugbar = $this->app->makeWith('debugbar', array(
+		    $this->debugBar = $this->app->makeWith('debugbar', array(
 			    'request' => $this->helper->request(),
 			    'response' => $this->helper->response()
 		    ));
-		    
-		    $this->debugbar->enable();
+
+		    $this->debugBar->enable();
 
 		    if(defined( 'SAVEQUERIES')){
-			    $this->debugbar->addCollector(new \App\Helpers\DebugBarWordpressDbCollector());
+			    $this->debugBar->addCollector(new \App\Helpers\DebugBarWordpressDbCollector());
 		    }else{
-			    $this->debugbar->addMessage('Add define("SAVEQUERIES") to wp-config.php to enable the WP Query Collector', 'WpLumen');
+			    $this->debugBar->addMessage('Add define("SAVEQUERIES") to wp-config.php to enable the WP Query Collector', 'WpLumen');
 		    }
 
 		    $this->app->singleton('debugbar', function(){
-		    	return  $this->debugbar;
-			});
+			    return  $this->debugBar;
+		    });
 
 	    }
     }
 	private function renderHeader(){
-		$this->debugbar->getJavascriptRenderer()->setEnableJqueryNoConflict(false)
-
+		$this->assetRenderer = $this->debugBar->getJavascriptRenderer(site_url(), '/');
+		$this->assetRenderer->setEnableJqueryNoConflict(false);
+		$this->assetRenderer->setIncludeVendors(true);
+		$this->assetRenderer->setBaseUrl(site_url());
 		?>
 		<style type="text/css">
-			<?php $this->debugbar->getJavascriptRenderer()->dumpCssAssets(); ?>
+			<?php $this->assetRenderer->dumpCssAssets(); ?>
 		</style>
-		<? echo $this->debugbar->getJavascriptRenderer()->renderHead();
+		<? echo str_replace('/wp-admin', '', $this->assetRenderer->renderHead());
 	}
 	private function renderFooter(){
 		?>
 		<script type="text/javascript">
-			<?php $this->debugbar->getJavascriptRenderer()->dumpJsAssets(); ?>
+			<?php $this->assetRenderer->dumpJsAssets(); ?>
 		</script>
-		<? echo $this->debugbar->getJavascriptRenderer()->render();
+		<? echo $this->assetRenderer->render();
 	}
 	public function boot()
 	{
-
-		$this->helper->wpHelper()
-			->addAction('admin_head', function(){
-				$this->renderHeader();
-			}, 100)
-			->addAction( 'wp_head', function(){
-				$this->renderHeader();
-			}, 100)
-			->addAction( 'admin_print_footer_scripts', function(){
-				$this->renderFooter();
-			}, 100)
-			->addAction( 'wp_footer', function(){
-				$this->renderFooter();
-			}, 100);
-
+		if(env('APP_DEBUG')) {
+			$this->helper->wpHelper()
+			             ->addAction( 'admin_head', function () {
+				             $this->renderHeader();
+			             }, 100 )
+			             ->addAction( 'wp_head', function () {
+				             $this->renderHeader();
+			             }, 100 )
+			             ->addAction( 'admin_print_footer_scripts', function () {
+				             $this->renderFooter();
+			             }, 100 )
+			             ->addAction( 'wp_footer', function () {
+				             $this->renderFooter();
+			             }, 100 );
+		}
 	}
 }

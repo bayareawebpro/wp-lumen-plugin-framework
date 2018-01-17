@@ -142,7 +142,6 @@ $app->register(App\Providers\WordpressServiceProvider::class);
 */
 
 $request = Illuminate\Http\Request::capture();
-$response = $app->handle($request);
 
 if(!is_admin()){
 
@@ -152,6 +151,9 @@ if(!is_admin()){
 	], function ($router) {
 		require __DIR__.'/../routes/web.php';
 	});
+
+	//Handle Request
+	$response = $app->handle($request);
 
 	//Send Response by Overwriting WP (eager)
 	if($app->make('config')->get('router.loading') == 'eager'){
@@ -172,6 +174,9 @@ if(!is_admin()){
 			}
 		}, 1);
 	}
+}else{
+	//Handle Request
+	$app->handle($request);
 }
 
 return $app;

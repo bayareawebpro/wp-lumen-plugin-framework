@@ -12,7 +12,7 @@ return [
 	 |
 	 */
 
-	'enabled' => null,
+	'enabled' => true,
 
 	/*
 	 |--------------------------------------------------------------------------
@@ -48,7 +48,7 @@ return [
 	 |
 	 */
 
-	'include_vendors' => true,
+	'include_vendors' => false,
 
 	/*
 	 |--------------------------------------------------------------------------
@@ -129,7 +129,7 @@ return [
 
 	'options' => [
 		'auth' => [
-			'show_name' => false,   // Also show the users name/email in the debugbar
+			'show_name' => true,   // Also show the users name/email in the debugbar
 		],
 		'db' => [
 			'with_params'       => true,   // Render SQL with the parameters substituted
