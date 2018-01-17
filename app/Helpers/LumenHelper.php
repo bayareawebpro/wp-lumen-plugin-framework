@@ -22,8 +22,10 @@ class LumenHelper {
 
 		if(!isset(self::$app_instances[$namespace])){
 			$this->app = self::$app_instances[$namespace] = $app;
-		}else{
+		}elseif(isset(self::$app_instances[$namespace])){
 			$this->app = self::$app_instances[$namespace];
+		}else{
+			throw new \Exception('Plugin instance cannot be found by namespace.');
 		}
 	}
 

@@ -10,7 +10,8 @@ class ExampleAdminController extends Controller
 
     /**
      * Create a new controller instance.
-     * @param array $panel_attributes (injected automatically)
+     * @param $helper LumenHelper
+     * @param $post WpPost
      */
     public function __construct(LumenHelper $helper, WpPost $post)
     {

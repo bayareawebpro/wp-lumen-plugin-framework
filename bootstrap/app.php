@@ -115,18 +115,20 @@ if(!$app->runningInConsole()){
 
 	$app->register(App\Providers\WordpressServiceProvider::class);
 	$app->register(App\Providers\DebugbarServiceProvider::class);
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| Include WP CleanUp Mods
+	|--------------------------------------------------------------------------
+	| Here we will register all of the application's WP modifications.
+	*/
+	//$files = $app->make('files');
+	//$files->requireOnce(realpath(__DIR__.'/../cleanup/head.php'));
+	//$files->requireOnce(realpath(__DIR__.'/../cleanup/rest-api.php'));
+	//$files->requireOnce(realpath(__DIR__.'/../cleanup/emojis.php'));
 }
 
-/*
-|--------------------------------------------------------------------------
-| Include WP CleanUp Mods
-|--------------------------------------------------------------------------
-| Here we will register all of the application's WP modifications.
-*/
-//$files = $app->make('files');
-//$files->requireOnce(realpath(__DIR__.'/../cleanup/head.php'));
-//$files->requireOnce(realpath(__DIR__.'/../cleanup/rest-api.php'));
-//$files->requireOnce(realpath(__DIR__.'/../cleanup/emojis.php'));
 
 /*
 |--------------------------------------------------------------------------
@@ -137,9 +139,6 @@ if(!$app->runningInConsole()){
 | can respond to, as well as the controllers that may handle them.
 */
 add_action('init',function() use ($app){
-
-
-
 
 	$request = Illuminate\Http\Request::capture();
 
@@ -163,7 +162,7 @@ add_action('init',function() use ($app){
 				exit($response->status());
 			}
 
-		//Load on 404 (lazy)
+		//Send Response on 404 (lazy)
 		}elseif(is_404()){
 
 			//Send Response During Template Redirect
