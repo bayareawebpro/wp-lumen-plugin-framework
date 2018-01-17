@@ -2,21 +2,26 @@
 use Illuminate\Support\ServiceProvider;
 class DebugbarServiceProvider extends ServiceProvider
 {
-	public $debugbar;
+	private $debugbar, $helper;
+
+	public function __construct($app)
+	{
+		$this->app = $app;
+		$this->helper = $this->app->make('lumenHelper');
+		$this->debugbar = null;
+	}
+
     public function register()
     {
-
-	    $helper = $this->app->make('lumenHelper');
-
 	    if (env('APP_DEBUG')) {
 		    $this->app->register(\Barryvdh\Debugbar\LumenServiceProvider::class);
 
 		    $this->debugbar = $this->app->makeWith('debugbar', array(
-			    'request' => $helper->request(),
-			    'response' => $helper->response()
+			    'request' => $this->helper->request(),
+			    'response' => $this->helper->response()
 		    ));
+		    
 		    $this->debugbar->enable();
-
 
 		    if(defined( 'SAVEQUERIES')){
 			    $this->debugbar->addCollector(new \App\Helpers\DebugBarWordpressDbCollector());
@@ -24,7 +29,7 @@ class DebugbarServiceProvider extends ServiceProvider
 			    $this->debugbar->addMessage('Add define("SAVEQUERIES") to wp-config.php to enable the WP Query Collector', 'WpLumen');
 		    }
 
-		    $this->app->singleton('debugbar', function() use ($helper){
+		    $this->app->singleton('debugbar', function(){
 		    	return  $this->debugbar;
 			});
 
@@ -49,9 +54,7 @@ class DebugbarServiceProvider extends ServiceProvider
 	public function boot()
 	{
 
-		$helper = $this->app->make('lumenHelper');
-
-		$helper->wpHelper()
+		$this->helper->wpHelper()
 			->addAction('admin_head', function(){
 				$this->renderHeader();
 			}, 100)
