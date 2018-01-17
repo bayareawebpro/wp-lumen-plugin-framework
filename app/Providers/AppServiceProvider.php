@@ -1,4 +1,5 @@
 <?php namespace App\Providers;
+use App\Helpers\WpHelper;
 use Illuminate\Support\ServiceProvider;
 use App\Helpers\LumenHelper;
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,6 @@ class AppServiceProvider extends ServiceProvider
 
 	    /** Register lumenHelper **/
 	    $this->app->singleton('lumenHelper', LumenHelper::class);
-
 	    $this->app->when(LumenHelper::class)
 	              ->needs('$app')
 	              ->give(function () {
@@ -21,6 +21,13 @@ class AppServiceProvider extends ServiceProvider
 	              });
 
 
+	    /** Register wpHelper **/
+	    $this->app->singleton('wpHelper', WpHelper::class);
+	    $this->app->when(WpHelper::class)
+	              ->needs('$app')
+	              ->give(function () {
+		              return $this->app;
+	              });
 
     }
 
@@ -28,9 +35,8 @@ class AppServiceProvider extends ServiceProvider
 	{
 		$helper = $this->app->make('lumenHelper');
 		$helper->loadConfigurations();
-
 	}
     public function provides() {
-	    return ['lumenHelper'];
+	    return ['lumenHelper', 'wpHelper'];
     }
 }

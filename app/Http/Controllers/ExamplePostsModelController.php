@@ -18,18 +18,17 @@ class ExamplePostsModelController extends Controller
 
     public function show($post, $metabox_attributes){
 
-	    $newpost = new WpPost();
-
-	    $newpost->post_title = str_random(16);
-	    $newpost->post_name = str_random(16);
-	    $newpost->post_author = 1;
-	    $newpost->save();
-	    $newpost->attachTaxonomy(22);
-	    $newpost->detachTaxonomy(22);
+//	    $newpost = new WpPost();
+//	    $newpost->post_title = str_random(16);
+//	    $newpost->post_name = str_random(16);
+//	    $newpost->post_author = 1;
+//	    $newpost->save();
+//	    $newpost->attachTaxonomy(22);
+//	    $newpost->detachTaxonomy(22);
 
 	    $post = $this->post->find($post->ID);
 
-	    echo $this->helper->view('meta_box', compact('post', 'metabox_attributes'));
+	    return $this->helper->view('meta_box', compact('post', 'metabox_attributes'));
     }
 
 	public function save($post, $post_id, $update){

@@ -91,10 +91,10 @@ class WpHelper {
 	 * @param string $screen post|page|custom_postType.,
 	 * @param string $context normal|side|advanced,
 	 * @param string $priority default|high|low,
-	 * @param integer $callback_args
+	 * @param integer $closure_args
 	 * @return self
 	 */
-	public function addMetaBox($id, $title, $closure, $screen = 'post', $context = 'normal', $priority = 'default', $callback_args = 1 ){
+	public function addMetaBox($id, $title, $closure, $screen = 'post', $context = 'normal', $priority = 'default', $closure_args = 1 ){
 		if(!is_admin()) return $this;
 
 
@@ -108,8 +108,8 @@ class WpHelper {
 				break;
 		}
 
-		add_action( $action, function() use( $id, $title, $closure, $screen, $context, $priority, $callback_args ){
-			add_meta_box( $id, $title, $closure, $screen, $context, $priority, $callback_args );
+		add_action( $action, function() use( $id, $title, $closure, $screen, $context, $priority, $closure_args ){
+			add_meta_box( $id, $title, $closure, $screen, $context, $priority, $closure_args );
 		});
 		return $this;
 	}
@@ -132,22 +132,17 @@ class WpHelper {
 	 * Add Widget
 	 * @param string $id
 	 * @param string $name
-	 * @param string $class
+	 * @param string $closure
 	 * @return self
 	 */
-	public function addDashboardWidget($id, $name, $class){
+	public function addDashboardWidget($id, $name, $closure){
 		if(!is_admin()) return $this;
 
-		add_action('wp_dashboard_setup', function() use ($id, $name, $class){
+		add_action('wp_dashboard_setup', function() use ($id, $name, $closure){
 			wp_add_dashboard_widget(
 				$id,
 				$name,
-				function() use ($id, $name, $class) {
-					$this->app->when($class)->needs('$widget_attributes')->give(function() use ($id, $name, $class){
-						return array( 'id'=>$id, 'name'=>$name );
-					});
-					$this->app->make($class);
-				}
+				$closure
 			);
 		});
 		return $this;
@@ -160,33 +155,20 @@ class WpHelper {
 	 * @param string $menu_title
 	 * @param string $menu_slug
 	 * @param string $page_title
-	 * @param string $class
+	 * @param string $closure
 	 * @param string|array $capability
 	 * @return self
 	 */
-	public function addAdminPanel($menu_slug, $menu_title, $page_title, $class, $capability = array('manage_options')){
+	public function addAdminPanel($menu_slug, $menu_title, $page_title, $closure, $capability = array('manage_options')){
 		if(!is_admin()) return $this;
 
-		add_action('admin_menu', function () use ($menu_slug, $page_title, $menu_title, $capability, $class){
+		add_action('admin_menu', function () use ($menu_slug, $page_title, $menu_title, $capability, $closure){
 			add_menu_page(
 				$page_title,
 				$menu_title,
 				$capability,
 				$menu_slug,
-				function() use ($page_title, $menu_title, $capability, $menu_slug, $class) {
-					$this->app
-						->when($class)
-						->needs('$panel_attributes')
-						->give(function() use ($page_title, $menu_title, $capability, $menu_slug, $class){
-						return array(
-							'menu_title'=>$menu_title,
-							'menu_slug'=>$menu_slug,
-							'page_title'=>$page_title,
-							'capability'=>$capability,
-						);
-					});
-					$this->app->make($class);
-				}
+				$closure
 			);
 		});
 		return $this;
@@ -197,34 +179,20 @@ class WpHelper {
 	 * @param string $menu_title
 	 * @param string $menu_slug
 	 * @param string $page_title
-	 * @param string $class
+	 * @param string $closure
 	 * @param string|array $capability
 	 * @return self
 	 */
-	public function addAdminSubPanel($parent_slug, $menu_slug, $menu_title, $page_title, $class, $capability = array('manage_options')){
+	public function addAdminSubPanel($parent_slug, $menu_slug, $menu_title, $page_title, $closure, $capability = array('manage_options')){
 		if(!is_admin()) return $this;
-		add_action('admin_menu', function () use ($parent_slug, $menu_slug, $menu_title, $page_title, $class, $capability){
+		add_action('admin_menu', function () use ($parent_slug, $menu_slug, $menu_title, $page_title, $closure, $capability){
 			add_submenu_page(
 				$parent_slug,
 				$page_title,
 				$menu_title,
 				$capability,
 				$menu_slug,
-				function() use ($parent_slug,$menu_slug, $page_title, $menu_title, $capability, $class) {
-					$this->app
-						->when($class)
-						->needs('$panel_attributes')
-						->give(function() use ($parent_slug,$menu_slug, $page_title, $menu_title, $capability, $class){
-						return array(
-							'parent_slug'=>$parent_slug,
-							'menu_slug'=>$menu_slug,
-							'menu_title'=>$menu_title,
-							'page_title'=>$page_title,
-							'capability'=>$capability,
-						);
-					});
-					$this->app->make($class);
-				}
+				$closure
 			);
 		});
 		return $this;
@@ -237,8 +205,8 @@ class WpHelper {
 	 * @param integer $priority
 	 * @return self
 	 */
-	public function addAction($action, \Closure $closure, $priority = 10, $callback_arguments = 0){
-		add_action($action, $closure, $priority, $callback_arguments);
+	public function addAction($action, \Closure $closure, $priority = 10, $closure_arguments = 0){
+		add_action($action, $closure, $priority, $closure_arguments);
 		return $this;
 	}
 
@@ -323,27 +291,9 @@ class WpHelper {
 			'charset'   => $wpdb->charset,
 			'collation' => $wpdb->collate,
 			'prefix'    => $wpdb->prefix,
-			'timezone'  => '+00:00', //self::getWpTimezoneOffset(),
+			'timezone'  => '+00:00',
 			'strict'    => false,
 		];
 	}
 
-	/**
-	 * Get WP Timezone Offset +00:00
-	 * @return string
-	 */
-	public static function getWpTimezoneOffset() {
-
-		if(function_exists('get_option')){
-			$offset  = get_option( 'gmt_offset' );
-			$amount = abs($offset);
-
-			if($offset > 0){
-				$offset = sprintf('+%02d:%02d',$amount, 0);
-			}else{
-				$offset = sprintf('-%02d:%02d',$amount, 0);
-			}
-			return $offset;
-		}
-	}
 }

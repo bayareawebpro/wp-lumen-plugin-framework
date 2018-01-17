@@ -23,14 +23,6 @@ class AuthController extends Controller
 	    $this->validator = $this->helper->validator();
     }
 
-    public function loginShortcode(){
-	    echo $this->helper->view('auth.login');
-    }
-
-	public function registerShortcode(){
-		echo $this->helper->view('auth.register');
-	}
-
     public function register(){
 
 	    $rules = [
@@ -92,10 +84,7 @@ class AuthController extends Controller
 
 
 		$user = $this->user->where('user_email',$this->request->get('user_email'))->first();
-		clean_user_cache($user->ID);
-		wp_clear_auth_cookie();
-		wp_set_current_user($user->ID);
-		wp_set_auth_cookie($user->ID, true, false);
+		$user->wpLogin();
 
 		return $this->helper->response(array(), 200);
 	}

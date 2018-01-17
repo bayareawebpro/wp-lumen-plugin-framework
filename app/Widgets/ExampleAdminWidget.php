@@ -3,14 +3,13 @@ use App\Helpers\LumenHelper;
 
 class ExampleAdminWidget {
 
-	protected $helper, $widget_attributes;
+	protected $helper;
 
-	function __construct(LumenHelper $helper, $widget_attributes) {
+	function __construct(LumenHelper $helper) {
 		$this->helper = $helper;
-		$this->widget_attributes = $widget_attributes;
-		$this->show();
 	}
-	public function show(){
-		echo $this->helper->view('widgets.admin-widget');
+
+	public function template(){
+		return $this->helper->view('widgets.admin-widget');
 	}
 }

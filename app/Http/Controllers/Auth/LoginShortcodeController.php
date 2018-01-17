@@ -18,11 +18,10 @@ class LoginShortcodeController extends Controller
     {
 	    $this->helper = $helper;
 	    $this->request = $this->helper->request();
-	    $this->view();
     }
 
-    private function view(){
-	    echo $this->helper->view('auth.login', array('user' =>$this->request->user()));
+    public function doShortcode(){
+	    return $this->helper->view('auth.login', array('user' =>$this->request->user()));
     }
 
 }

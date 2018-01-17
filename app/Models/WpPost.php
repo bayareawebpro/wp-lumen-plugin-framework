@@ -3,22 +3,25 @@
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use App\Helpers\TimezoneHelper;
 
 class WpPost extends Model {
 
-	/** Appendable Attributes **/
-	public $appends = ['permalink'];
+	const POST_TYPE = 'post';
 
 	/** Model Settings **/
 	protected $table = 'posts';
 	protected $primaryKey = 'ID';
-	protected $hidden = [];
 	protected $guarded = ['ID'];
+	protected $hidden = [];
 
 	/** Timestamps **/
 	const CREATED_AT = 'post_date_gmt';
 	const UPDATED_AT = 'post_modified_gmt';
 	protected $dates = ['post_date','post_modified'];
+
+	/** Appendable Attributes **/
+	public $appends = ['permalink'];
 
 	/**
 	 * Get Permalink by Traversal
@@ -86,23 +89,6 @@ class WpPost extends Model {
 		}
 		return $value;
 	}
-	/**
-	 * Get CreatedAt with WP Timezone
-	 * @param $value
-	 * @return Carbon
-	 */
-	public function getPostDateAttribute($value){
-		return Carbon::parse($value, get_option('timezone_string'));
-	}
-
-	/**
-	 * Get UpdatedAt with WP Timezone
-	 * @param $value
-	 * @return Carbon
-	 */
-	public function getPostModifiedAttribute($value){
-		return Carbon::parse($value, get_option('timezone_string'));
-	}
 
 	/**
 	 * Post Meta Relationship
@@ -168,17 +154,34 @@ class WpPost extends Model {
 	}
 
 	/**
+	 * Get Post Date Attribute
+	 * @param $value
+	 * @return Carbon
+	 */
+	public function getPostDateAttribute($value){
+		return Carbon::parse($value, TimezoneHelper::getOffset());
+	}
+
+	/**
+	 * Get Post Modified Attribute
+	 * @param $value
+	 * @return Carbon
+	 */
+	public function getPostModifiedAttribute($value){
+		return Carbon::parse($value, TimezoneHelper::getOffset());
+	}
+
+	/**
 	 * Model Callbacks
 	 */
 	protected static function boot() {
 		parent::boot();
-
-		static::saving(function($model) {
-			$model->post_modified = Carbon::now(get_option('timezone_string'));
-		});
 		static::creating(function($model) {
-			$model->post_date = Carbon::now(get_option('timezone_string'));
-			$model->post_type = (isset($model->post_type) ? $model->post_type : 'post');
+			$model->post_type = self::POST_TYPE;
+			$model->post_date = Carbon::now(TimezoneHelper::getOffset());
+		});
+		static::saving(function($model) {
+			$model->post_modified = Carbon::now(TimezoneHelper::getOffset());
 		});
 	}
 

@@ -19,12 +19,10 @@ class RegisterShortcodeController extends Controller
 	    $this->user = $user;
 	    $this->helper = $helper;
 	    $this->request = $this->helper->request();
-	    $this->registerShortcode();
     }
 
-	private function registerShortcode(){
-		echo $this->helper->view('auth.register', array('user' =>$this->request->user()));
+	public function doShortcode(){
+		return $this->helper->view('auth.register', array('user' =>$this->request->user()));
 	}
-
 
 }

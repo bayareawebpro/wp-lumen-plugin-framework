@@ -17,8 +17,6 @@ class ExampleTranslationController extends Controller
 	}
 
 	public function show(){
-
 		echo $this->translator->trans('talk.test');
-
 	}
 }

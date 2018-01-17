@@ -16,12 +16,15 @@ class ExampleMetaBoxController extends Controller
 	    $this->post = $post;
     }
 
-    public function show($post, $metabox_attributes){
 
+	public function menuMetaBox(){
+		return 'Test';
+	}
 
-	    $post = $this->post->find($post->ID);
+	public function show($post, $metabox_attributes){
 
-	    echo $this->helper->view('meta_box', compact('post', 'metabox_attributes'));
+		$post = $this->post->find($post->ID);
+	    return $this->helper->view('meta_box', compact('post', 'metabox_attributes'));
     }
 
 	public function save($post, $post_id, $update){

@@ -1,7 +1,6 @@
 //VUE
 import Vue from 'vue'
 
-
 //Mount
 let LumenContainer = document.getElementById("lumen_example");
 if(LumenContainer !== null) {
@@ -16,6 +15,3 @@ if(LumenContainer !== null) {
 		methods:{}
 	}).$mount(LumenContainer)
 }
-
-
-

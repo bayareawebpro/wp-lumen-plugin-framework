@@ -5,6 +5,8 @@
 |--------------------------------------------------------------------------
 | Loaded in mu-plugins or, include here.
 */
+require_once __DIR__.'/../vendor/autoload.php';
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +21,6 @@ try {
 	exit('Wp-Lumen: Laravel\Lumen\Application Class not found.  Check wp-load.php path in bootstrap/app.php (17)');
 }
 
-/*
-|--------------------------------------------------------------------------
-| Require Local Autoloader
-|--------------------------------------------------------------------------
-*/
-require_once __DIR__.'/../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -107,17 +103,20 @@ $app->routeMiddleware([
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
-$app->register(App\Providers\WordpressServiceProvider::class);
-//$app->register(App\Providers\DebugbarServiceProvider::class);
 
 
-// Add SessionServiceProvider
+// Add Session ServiceProvider
 $app->configure('session');
 $app->bind(\Illuminate\Session\SessionManager::class, function ($app) {
 	return new \Illuminate\Session\SessionManager($app);
 });
 $app->register(\Illuminate\Session\SessionServiceProvider::class);
 
+// Add DebugBar ServiceProvider
+//$app->register(App\Providers\DebugbarServiceProvider::class);
+
+// Add Wordpress ServiceProvider
+$app->register(App\Providers\WordpressServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -140,7 +139,6 @@ $app->register(\Illuminate\Session\SessionServiceProvider::class);
 | can respond to, as well as the controllers that may handle them.
 */
 $request = Illuminate\Http\Request::capture();
-//$app->handle($request);
 
 if(!is_admin()){
 
@@ -157,18 +155,22 @@ if(!is_admin()){
 			$response->send();
 			exit($response->status());
 		}
+
 	}elseif(is_404()){ //Load after WP
 
 		//Start Router During Template Redirect
 		add_action('template_redirect',function() use ($app, $request){
-		$response = $app->handle($request);
+			$response = $app->handle($request);
 
-		if($response->content()){
-			$response->send();
-			exit($response->status());
-		}
+			if($response->content()){
+				$response->send();
+				exit($response->status());
+			}
 		}, 1);
 	}
+}else{
+	$app->handle($request);
+
 }
 
 return $app;

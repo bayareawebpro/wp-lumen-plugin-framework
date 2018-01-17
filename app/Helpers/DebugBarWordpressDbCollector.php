@@ -3,13 +3,15 @@ use DebugBar\DataCollector\AssetProvider;
 use DebugBar\DataCollector\DataCollector;
 use DebugBar\DataCollector\Renderable;
 use DebugBar\DebugBarException;
-
+use DebugBar;
 class DebugBarWordpressDbCollector extends DataCollector implements Renderable, AssetProvider
 {
 	protected $wpdb;
 
-	public function __construct($wpdb)
+	public function __construct()
 	{
+
+		global $wpdb;
 		$this->wpdb = $wpdb;
 	}
 
@@ -17,22 +19,27 @@ class DebugBarWordpressDbCollector extends DataCollector implements Renderable, 
 	{
 		$queries = array();
 		$totalExecTime = 0;
-		foreach ($this->wpdb->queries as $q) {
-			list($query, $duration, $caller) = $q;
-			$queries[] = array(
-				'sql' => $query,
-				'duration' => $duration,
-				'duration_str' => $this->getDataFormatter()->formatVar($duration)
+
+
+		if(count($this->wpdb->queries)){
+			foreach ($this->wpdb->queries as $q) {
+				list($query, $duration, $caller) = $q;
+				$queries[] = array(
+					'sql' => $query,
+					'duration' => $duration,
+					'duration_str' => $this->getDataFormatter()->formatVar($duration)
+				);
+				$totalExecTime += $duration;
+			}
+
+			return array(
+				'nb_statements' => count($queries),
+				'accumulated_duration' => $totalExecTime,
+				'accumulated_duration_str' => $this->getDataFormatter()->formatVar($totalExecTime),
+				'statements' => $queries
 			);
-			$totalExecTime += $duration;
 		}
 
-		return array(
-			'nb_statements' => count($queries),
-			'accumulated_duration' => $totalExecTime,
-			'accumulated_duration_str' => $this->getDataFormatter()->formatVar($totalExecTime),
-			'statements' => $queries
-		);
 	}
 
 	public function getName()

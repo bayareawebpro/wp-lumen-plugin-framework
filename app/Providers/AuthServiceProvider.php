@@ -38,7 +38,12 @@ class AuthServiceProvider extends ServiceProvider
         // should return either a User instance or null. You're free to obtain
         // the User instance via an API token or any other method necessary.
 	    $this->app['auth']->viaRequest('wp', function ($request) {
-		    return WpUser::where('ID', get_current_user_id())->first();
+
+	    	$currentUser = WpUser::where('ID', get_current_user_id())->first();
+		    $request->setUserResolver(function () use ($currentUser) {
+			    return $currentUser;
+		    });
+		    return $currentUser;
 	    });
 
 
