@@ -17,7 +17,6 @@ class UnInstall{
 
     /**
      * Class Constructor called by init()
-     * Get instance of plugin using namespace & call methods
      */
     public function __construct()
     {
@@ -26,7 +25,7 @@ class UnInstall{
     }
 
     /**
-     * Remove Database Schema
+     * Modify Database Schema
      */
     private function schema()
     {
@@ -37,7 +36,7 @@ class UnInstall{
     }
 
     /**
-     * Remove Data
+     * Process Data
      */
     private function data()
     {

@@ -19,7 +19,6 @@ class DeActivate{
 
     /**
      * Class Constructor called by init()
-     * Get instance of plugin using namespace & call methods
      */
     public function __construct()
     {
@@ -37,7 +36,7 @@ class DeActivate{
     }
 
     /**
-     * Process Database Data
+     * Process Data
      */
     public function data()
     {

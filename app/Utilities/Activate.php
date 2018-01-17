@@ -7,7 +7,7 @@ class Activate extends  Migration{
 
 
     /**
-     * Class Initialization called by Hook
+     * Class Initialization called by Hook (Requires Static Method)
      * @return Activate
      */
     public static function init()
@@ -17,7 +17,6 @@ class Activate extends  Migration{
 
     /**
      * Class Constructor called by init()
-     * Get instance of plugin using namespace & call methods
      */
     public function __construct()
     {
@@ -26,7 +25,7 @@ class Activate extends  Migration{
     }
 
     /**
-     * Activation Database Schema
+     * Modify Database Schema
      */
     public function schema()
     {
