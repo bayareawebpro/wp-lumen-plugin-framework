@@ -5,8 +5,19 @@
         <div class="welcome-panel-column-container">
             <div class="welcome-panel-column">
                 <h3>Support Further Development</h3>
-                <a class="button button-primary button-hero" href="#">Become a Patron</a>
-                <p>or, <a href="#">buy me a beer!</a></p>
+
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                    <input type="hidden" name="business" value="dan@bayareawebpro.com">
+                    <input type="hidden" name="cmd" value="_donations">
+                    <input type="hidden" name="item_name" value="WP Lumen Framework">
+                    <input type="hidden" name="item_number" value="Developer Donation">
+                    <input type="hidden" name="currency_code" value="USD">
+                    <button type="submit" name="submit" class="button button-primary button-hero">Donate</button>
+                    <img alt="" width="1" height="1"
+                         src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
+                </form>
+
+                <p>or, <a href="https://github.com/bayareawebpro/wp-lumen-plugin-framework" target="_blank">contribute on GitHub!</a></p>
             </div>
             <div class="welcome-panel-column">
                 <h3>Documentation</h3>
