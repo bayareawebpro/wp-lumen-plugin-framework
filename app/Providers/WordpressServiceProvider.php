@@ -16,7 +16,6 @@ class WordpressServiceProvider extends ServiceProvider
 		parent::__construct( $app );
 		$this->lumenHelper = $this->app->make('lumenHelper');
 		$this->wpHelper = $this->lumenHelper->wpHelper();
-		$this->absolutePath = realpath(__DIR__.'/../plugin.php');
 	}
 
 	/**
