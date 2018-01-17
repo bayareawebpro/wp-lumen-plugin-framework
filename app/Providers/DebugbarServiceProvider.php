@@ -6,6 +6,8 @@ class DebugbarServiceProvider extends ServiceProvider
 
 	public function __construct($app)
 	{
+		parent::__construct($app);
+
 		$this->app = $app;
 		$this->helper = $this->app->make('lumenHelper');
 		$this->debugbar = null;
