@@ -126,13 +126,12 @@ add_action('init',function() use ($app){
 
 
 	if(!$app->runningInConsole()){
-		if($app['config']->get('session.driver') == 'database'){
-			$app->bind(\Illuminate\Session\SessionManager::class, function ($app) {
-				return new \Illuminate\Session\SessionManager($app);
-			});
-			$app->register(\Illuminate\Session\SessionServiceProvider::class);
-			$app->middleware([\Illuminate\Session\Middleware\StartSession::class]);
-		}
+
+		$app->bind(\Illuminate\Session\SessionManager::class, function ($app) {
+			return new \Illuminate\Session\SessionManager($app);
+		});
+		$app->register(\Illuminate\Session\SessionServiceProvider::class);
+		$app->middleware([\Illuminate\Session\Middleware\StartSession::class]);
 		$app->register(App\Providers\WordpressServiceProvider::class);
 		$app->register(App\Providers\DebugbarServiceProvider::class);
 	}
