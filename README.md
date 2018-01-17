@@ -22,6 +22,8 @@ Once you have run the composer installer, upload and "Activate" the plugin in yo
 In-Progress, please bookmark the Wiki, I will be adding new How-To's when possible.
 https://github.com/bayareawebpro/wp-lumen-plugin-framework/wiki
 
+Api Docs: https://cdn.rawgit.com/bayareawebpro/wp-lumen-plugin-framework/99bc7e1c/_docs/build/index.html
+
 ## How to Contribute
 
 Make a pull-request or open a new issue with a link to a gist snippet.  I'll be happy to adapt to everyone's needs.
