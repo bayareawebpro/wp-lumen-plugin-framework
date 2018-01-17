@@ -22,7 +22,7 @@
             <div class="welcome-panel-column">
                 <h3>Documentation</h3>
                 <ul>
-                    <li><a target="_blank" href="https://lumen.com/docs/5.5"><span class="dashicons dashicons-media-document"></span> Lumen Docs</a></li>
+                    <li><a target="_blank" href="https://lumen.laravel.com/docs/5.5"><span class="dashicons dashicons-media-document"></span> Lumen Docs</a></li>
                     <li><a target="_blank" href="https://laravel.com/docs/5.5"><span class="dashicons dashicons-media-document"></span> Laravel Docs</a></li>
                     <li><a target="_blank" href="https://laravel.com/docs/5.5/mix"><span class="dashicons dashicons-media-document"></span> Laravel Mix Docs</a></li>
                     <li><a target="_blank" href="https://vuejs.org/v2/api/"><span class="dashicons dashicons-media-document"></span> Vue.js Docs</a></li>
