@@ -11,3 +11,13 @@ Download this package and run ```php composer install``` in your terminal.
 http://composer.org
 
 Once you have run the composer installer, upload and "Activate" the plugin in your Wordpress installation.
+
+## Documentation
+
+In-Progress, please bookmark the Wiki, I will be adding new How-To's when possible.
+https://github.com/bayareawebpro/wp-lumen-plugin-framework/wiki
+
+## How to Contribute
+
+Make pull-requests or open a new issue with a link to a gist snippet.  I'll be happy to adapt to everyone's needs.
+https://github.com/bayareawebpro/wp-lumen-plugin-framework/wiki
