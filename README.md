@@ -6,6 +6,9 @@ WP Lumen Plugin Framework provides an architecture that allows rapid development
 
 ![](https://github.com/bayareawebpro/wp-lumen-plugin-framework/blob/master/resources/assets/screenshots/preview.png)
 
+## Live Demo
+http://wplumen.bayareawebpro.com
+
 ## Setup
 
 Download this package and run ```php composer install``` in your terminal.
