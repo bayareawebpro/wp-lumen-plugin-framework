@@ -10,6 +10,4 @@ Download this package and run ```php composer install``` in your terminal.
 
 http://composer.org
 
-### Documentation & Developer Tools
-
 Once you have run the composer installer, upload and "Activate" the plugin in your Wordpress installation.
