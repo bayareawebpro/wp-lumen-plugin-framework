@@ -67,7 +67,7 @@ class DebugbarServiceProvider extends ServiceProvider
 		<style type="text/css">
 			<?php $this->assetRenderer->dumpCssAssets(); ?>
 		</style>
-		<?
+		<?php
 		echo $this->assetRenderer->renderHead();
 	}
 	private function renderFooter(){
@@ -75,6 +75,7 @@ class DebugbarServiceProvider extends ServiceProvider
 		<script type="text/javascript">
 			<?php $this->assetRenderer->dumpJsAssets(); ?>
 		</script>
-		<? echo $this->assetRenderer->render();
+		<?php
+		echo $this->assetRenderer->render();
 	}
 }
