@@ -6,7 +6,6 @@ class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
      * @return void
      */
     public function register()
@@ -20,7 +19,6 @@ class AppServiceProvider extends ServiceProvider
 		              return $this->app;
 	              });
 
-
 	    /** Register wpHelper **/
 	    $this->app->singleton('wpHelper', WpHelper::class);
 	    $this->app->when(WpHelper::class)
@@ -29,14 +27,20 @@ class AppServiceProvider extends ServiceProvider
 		              return $this->app;
 	              });
 
+	    /** Load All Configurations (config/*.php) **/
+	    $this->app->make('lumenHelper')->loadConfigurations();
     }
 
-	public function boot()
-	{
-		foreach($this->app->make('files')->files(realpath(__DIR__.'/../../config/')) as $configFile){
-			$this->app->configure($configFile->getBasename('.php'));
-		}
-	}
+	/**
+	 * Boot application services.
+	 * @return void
+	 */
+	public function boot() {}
+
+	/**
+	 * Provide application services.
+	 * @return array
+	 */
     public function provides() {
 	    return ['lumenHelper', 'wpHelper'];
     }

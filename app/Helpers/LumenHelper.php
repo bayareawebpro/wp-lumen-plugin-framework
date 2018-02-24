@@ -1,5 +1,4 @@
 <?php namespace App\Helpers;
-
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Bus\Dispatcher;
 class LumenHelper {
@@ -13,20 +12,20 @@ class LumenHelper {
 	 * @throws \Exception
 	 */
 	public function __construct($app) {
-
-		$namespace = $app->make('config')->get('app.namespace');
-
-		if(empty($namespace)){
-			throw new \Exception('Plugin namespace has not been set in config/app.php');
-		}
-
+		$namespace = $this->getNamespace();
 		if(!isset(self::$app_instances[$namespace])){
 			$this->app = self::$app_instances[$namespace] = $app;
-		}elseif(isset(self::$app_instances[$namespace])){
-			$this->app = self::$app_instances[$namespace];
 		}else{
-			throw new \Exception('Plugin instance cannot be found by namespace.');
+			$this->app = self::$app_instances[$namespace];
 		}
+	}
+
+	/**
+	 * Get Application Namespace
+	 * @return string
+	 */
+	public function getNamespace(){
+		return explode('\\', with(new \ReflectionClass($this))->getNamespaceName())[0];
 	}
 
 	/**
@@ -39,6 +38,18 @@ class LumenHelper {
 			return new self(self::$app_instances[$namespace]);
 		}
 		return false;
+	}
+
+
+	/**
+	 * Load Configurations.
+	 * @return void
+	 */
+	function loadConfigurations()
+	{
+		foreach($this->app->get('files')->files(realpath($this->base_path('config'))) as $configFile){
+			$this->app->configure($configFile->getBasename('.php'));
+		}
 	}
 
 	/**
