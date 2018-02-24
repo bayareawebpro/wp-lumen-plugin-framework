@@ -6,12 +6,11 @@
 |--------------------------------------------------------------------------
 */
 
-try {
-	if(!class_exists('Laravel\Lumen\Application')){
-		require_once(realpath(__DIR__."/../../../../wp-load.php"));
-	}
-} catch (Exception $e) {
-	exit('Wp-Lumen: Laravel\Lumen\Application Class not found.  Check wp-load.php path in bootstrap/app.php (line: 11)');
+$wpLoad = realpath(__DIR__."/../../../../wp-load.php");
+if(!class_exists('Laravel\Lumen\Application') && is_file($wpLoad)){
+	require_once($wpLoad);
+}else{
+	exit('Wp-Lumen: wp-load.php not found.  Check path in bootstrap/app.php (line: 11)');
 }
 
 /*
@@ -41,11 +40,9 @@ try {
 | that serves as the central piece of this framework. We'll use this
 | application as an "IoC" container and router for this framework.
 */
-
 $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
-
 $app->withEloquent();
 
 //Facades will not work with multiple WP-Lumen Plugins Running, use the Helper instead.
@@ -80,8 +77,7 @@ $app->singleton(
 | route or middleware that'll be assigned to some specific routes.
 |
 */
-//$app->middleware([
-//]);
+//$app->middleware([]);
 
 $app->routeMiddleware([
 	'auth' => App\Http\Middleware\Authenticate::class,
@@ -113,9 +109,9 @@ if(!$app->runningInConsole()){
 		$app->middleware([\Illuminate\Session\Middleware\StartSession::class]);
 	}
 
+
 	$app->register(App\Providers\WordpressServiceProvider::class);
 	$app->register(App\Providers\DebugbarServiceProvider::class);
-
 
 	/*
 	|--------------------------------------------------------------------------
@@ -138,45 +134,44 @@ if(!$app->runningInConsole()){
 | the application. This will provide all of the URLs the application
 | can respond to, as well as the controllers that may handle them.
 */
-add_action('init',function() use ($app){
+if(!$app->runningInConsole()) {
+	add_action( 'init', function () use ( $app ) {
+		$request = Illuminate\Http\Request::capture();
+		if ( ! is_admin() ) {
 
-	$request = Illuminate\Http\Request::capture();
+			//Boot Router for Front-end Requests
+			$app->router->group( [
+				'namespace' => 'App\Http\Controllers',
+			], function ( $router ) {
+				require __DIR__ . '/../routes/web.php';
+			} );
 
-	if(!is_admin()){
+			//Handle Request
+			$response = $app->handle( $request );
 
-		//Boot Router for Front-end Requests
-		$app->router->group([
-			'namespace' => 'App\Http\Controllers',
-		], function ($router) {
-			require __DIR__.'/../routes/web.php';
-		});
+			//Send Response by Overwriting WP (eager)
+			if ( $app->make( 'config' )->get( 'router.loading' ) == 'eager' ) {
 
-		//Handle Request
-		$response = $app->handle($request);
-
-		//Send Response by Overwriting WP (eager)
-		if($app->make('config')->get('router.loading') == 'eager'){
-
-			if($response->content()){
-				$response->send();
-				exit($response->status());
-			}
-
-		//Send Response on 404 (lazy)
-		}elseif(is_404()){
-
-			//Send Response During Template Redirect
-			add_action('template_redirect',function() use ($app, $request, $response){
-				if($response->content()){
+				if ( $response->content() ) {
 					$response->send();
-					exit($response->status());
+					exit( $response->status() );
 				}
-			}, 1);
-		}
-	}else{
-		//Handle Request
-		$app->handle($request);
-	}
-});
 
+				//Send Response on 404 (lazy)
+			} elseif ( is_404() ) {
+
+				//Send Response During Template Redirect
+				add_action( 'template_redirect', function () use ( $app, $request, $response ) {
+					if ( $response->content() ) {
+						$response->send();
+						exit( $response->status() );
+					}
+				}, 1 );
+			}
+		} else {
+			//Handle Request
+			$app->handle( $request );
+		}
+	} );
+}
 return $app;
