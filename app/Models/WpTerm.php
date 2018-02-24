@@ -10,7 +10,6 @@ class WpTerm extends Model {
     public function meta(){
         $this->hasMany(WpTermMeta::class, 'term_id','term_id');
     }
-
 	public function taxonomy(){
 
 		return $this->belongsTo(

@@ -7,4 +7,5 @@ class WpOptions extends Model {
     protected $primaryKey = 'option_id';
 	public $timestamps = false;
 
+	//ToDo: Implement WpOptions Model
 }

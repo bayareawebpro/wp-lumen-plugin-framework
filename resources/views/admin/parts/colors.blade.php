@@ -1,8 +1,8 @@
 <table style="width: 80%;text-align: center;border: 0 none">
     <tbody>
     <tr>
-        <td style="border: 0 none"><?php _e( 'prior WordPress 4.2', 'wp_admin_style' ); ?></td>
-        <td style="border: 0 none"><?php _e( 'since WordPress 4.2', 'wp_admin_style' ); ?></td>
+        <td style="border: 0 none">prior WordPress 4.2</td>
+        <td style="border: 0 none">since WordPress 4.2</td>
     </tr>
     <tr>
         <td style="background: #0074a2;color: #fff;border: 2px solid #fff;padding: 2em

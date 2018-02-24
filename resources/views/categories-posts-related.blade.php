@@ -1,6 +1,6 @@
-@if($lumen_docs_categories)
+@if($categories)
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        @foreach($lumen_docs_categories as $index => $category)
+        @foreach($categories as $index => $category)
             <div class="panel panel-default">
                 <div class="panel-heading" role="tab" id="heading{{$index}}">
                     <h4 class="panel-title">

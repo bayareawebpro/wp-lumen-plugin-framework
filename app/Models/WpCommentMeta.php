@@ -3,5 +3,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class WpCommentMeta extends Model {
 
- 
+    //ToDo: Implement WpComment Meta Model
 }

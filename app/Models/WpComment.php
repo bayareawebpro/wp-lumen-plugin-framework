@@ -6,4 +6,5 @@ class WpComment extends Model {
 	protected $primaryKey = 'comment_ID';
 	public $timestamps = false;
 
+	//ToDo: Implement WpComment Model
 }

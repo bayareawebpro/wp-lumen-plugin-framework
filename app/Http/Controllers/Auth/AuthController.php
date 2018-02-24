@@ -12,7 +12,6 @@ class AuthController extends Controller
      * Create a new controller instance.
      * @var $helper LumenHelper
      * @var $user WpUser
-     * $user
      */
     public function __construct(LumenHelper $helper, WpUser $user)
     {
@@ -80,8 +79,6 @@ class AuthController extends Controller
 		];
 
 		$this->validate($this->request, $rules, $messages);
-
-
 
 		$user = $this->user->where('user_email',$this->request->get('user_email'))->first();
 		$user->wpLogin();
