@@ -10,7 +10,7 @@ $wpLoad = realpath(__DIR__."/../../../../wp-load.php");
 if(!class_exists('Laravel\Lumen\Application') && is_file($wpLoad)){
 	require_once($wpLoad);
 }else{
-	exit('Wp-Lumen: wp-load.php not found.  Check path in bootstrap/app.php (line: 11)');
+	exit('Wp-Lumen: wp-load.php not found.  Check path in bootstrap/app.php (line: 11)'.PHP_EOL);
 }
 
 /*
