@@ -18,10 +18,10 @@ class WordpressCleanUpServiceProvider extends ServiceProvider
         parent::__construct( $app );
         $this->files = $app->make('files');
         $this->cleanup = array(
-            'head',
-            'rest-api',
-            'emojis',
-            'admin-bar',
+//            'head',
+//            'rest-api',
+//            'emojis',
+//            'admin-bar',
         );
     }
 
