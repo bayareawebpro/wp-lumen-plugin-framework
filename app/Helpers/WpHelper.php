@@ -1,7 +1,7 @@
 <?php namespace App\Helpers;
 
 class WpHelper {
-	protected $app;
+	protected $app, $lumenHelper;
 
 	/**
 	 * Add Admin Notice
@@ -9,6 +9,7 @@ class WpHelper {
 	 */
 	public function __construct($app){
 		$this->app = $app;
+        $this->lumenHelper = $this->app->make('lumenHelper');
 	}
 
 	/**
@@ -36,9 +37,8 @@ class WpHelper {
 	 */
 	public function addPluginLinks($plugin_links = array()){
 		if(!is_admin()) return;
-
 		add_filter('plugin_action_links', function($existing_links, $plugin_basename) use ($plugin_links){
-			$pluginPath = plugin_basename(realpath(__DIR__.'/../../plugin.php'));
+			$pluginPath = plugin_basename($this->lumenHelper->base_path($this->lumenHelper->config('app.plugin_path')));
 			if ($plugin_basename == $pluginPath) {
 				foreach($plugin_links as $link){
 					array_unshift($existing_links, $link);

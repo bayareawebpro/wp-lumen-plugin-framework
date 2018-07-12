@@ -40,12 +40,11 @@ add_action( 'admin_init', function () {
 /**
  * Remove access to the dashboard
  */
-add_action( 'admin_init', function () {
-  global $pagenow; // Get current page
-  $redirect = get_admin_url( null, 'edit.php' ); // Where to redirect
-
-  if ( $pagenow == 'index.php' ) {
-    wp_redirect( $redirect, 301 );
-    exit;
-  }
-});
+//add_action( 'admin_init', function () {
+//  global $pagenow; // Get current page
+//  $redirect = get_admin_url( null, 'edit.php' ); // Where to redirect
+//  if ( $pagenow == 'index.php' ) {
+//    wp_redirect( $redirect, 301 );
+//    exit;
+//  }
+//});

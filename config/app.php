@@ -1,5 +1,9 @@
 <?php
 return [
+    'plugin_file' => 'wp-lumen-framework.php',
+
+    'debug' => env('APP_DEBUG'),
+    'env' => env('APP_ENV'),
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
@@ -10,7 +14,6 @@ return [
     | will not be safe. Please do this before deploying an application!
     |
     */
-
     'key' => 'SdJFxJjx6z8vyoUTOAEhGdZtpZAWqYh4',
     'cipher' => 'AES-256-CBC',
     /*

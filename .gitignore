@@ -1,14 +1,13 @@
-.idea/*
+.idea
 notes.txt
 composer.lock
 package-lock.json
-node_modules/
-vendor/
+node_modules
+vendor
 storage/app/*
 storage/logs/*
 storage/debugbar/*
 storage/framework/cache/*
 storage/framework/sessions/*
 storage/framework/views/*
-sami.config.php
 _docs/cache

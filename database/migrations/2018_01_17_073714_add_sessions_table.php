@@ -13,10 +13,6 @@ class AddSessionsTable extends Migration
      */
     public function up()
     {
-	    global $wpdb;
-	    if(!version_compare(mb_substr($wpdb->get_results( 'SELECT version() as version')[0]->version, 0, 6), '5.7.7') >= 0){
-		    Schema::defaultStringLength(191);
-	    }
 
 	    Schema::create('wplumen_sessions', function (Blueprint $table) {
 		    $table->string('id')->unique();

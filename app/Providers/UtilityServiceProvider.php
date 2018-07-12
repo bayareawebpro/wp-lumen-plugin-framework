@@ -1,4 +1,7 @@
 <?php namespace App\Providers;
+use App\Utilities\Activate;
+use App\Utilities\DeActivate;
+use App\Utilities\UnInstall;
 use Illuminate\Support\ServiceProvider;
 class UtilityServiceProvider extends ServiceProvider
 {
@@ -6,7 +9,7 @@ class UtilityServiceProvider extends ServiceProvider
 	/** @var \App\Helpers\LumenHelper $lumenHelper **/
 	/** @var \App\Helpers\WpHelper $wpHelper **/
 
-	private $wpHelper, $lumenHelper, $absolutePath;
+    protected $wpHelper, $lumenHelper, $pluginPath;
 
 	/**
 	 * WordpressServiceProvider constructor.
@@ -16,16 +19,21 @@ class UtilityServiceProvider extends ServiceProvider
 		parent::__construct( $app );
 		$this->lumenHelper = $this->app->make('lumenHelper');
 		$this->wpHelper = $this->lumenHelper->wpHelper();
-		$this->absolutePath = realpath(__DIR__.'/../../plugin.php');
+		$this->pluginPath = $this->lumenHelper->base_path($this->lumenHelper->config('app.plugin_file'));
 	}
-
+    /**
+     * Register any application services.
+     * @return void
+     */
+    public function register(){
+        register_activation_hook($this->pluginPath, array('\App\Utilities\Activate', 'init'));
+        register_deactivation_hook($this->pluginPath, array('\App\Utilities\DeActivate', 'init'));
+        register_uninstall_hook($this->pluginPath, array('\App\Utilities\UnInstall', 'init'));
+    }
 	/**
 	 * Hook Schema Into Activate, DeActivate & UnInstall
 	 * (Allows Schema Class Usage)
 	 */
     public function boot(){
-		register_activation_hook($this->absolutePath, array('\App\Utilities\Activate', 'init'));
-		register_deactivation_hook($this->absolutePath, array('\App\Utilities\DeActivate', 'init'));
-		register_uninstall_hook($this->absolutePath, array('\App\Utilities\UnInstall', 'init'));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 return [
-	'enabled' => false,
+	'enabled' => true,
 	/*
 	|--------------------------------------------------------------------------
 	| Default Session Driver

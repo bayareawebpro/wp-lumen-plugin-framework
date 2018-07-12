@@ -26,3 +26,4 @@ add_action( 'init', function () {
   // Remove oEmbed discovery links.
   remove_action( 'wp_head', 'wp_oembed_add_discovery_links', 10 );
 });
+

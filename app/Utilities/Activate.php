@@ -4,8 +4,6 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 class Activate extends  Migration{
-
-
     /**
      * Class Initialization called by Hook (Requires Static Method)
      * @return Activate
@@ -20,8 +18,9 @@ class Activate extends  Migration{
      */
     public function __construct()
     {
-    	$this->schema();
-		$this->data();
+        $this->app = \App\Helpers\LumenHelper::plugin('App')->config();
+        $this->schema();
+        $this->data();
     }
 
     /**
@@ -29,8 +28,11 @@ class Activate extends  Migration{
      */
     public function schema()
     {
-//	    Artisan::call('migrate:install');
-//	    Artisan::call('migrate');
+        if(config('session.driver') === 'database'){
+            Schema::dropIfExists(config('session.table'));
+            Artisan::call('migrate:install');
+            Artisan::call('migrate');
+        }
     }
 
     /**

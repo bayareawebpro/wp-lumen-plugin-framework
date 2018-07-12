@@ -117,7 +117,7 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    string
+                    static&nbsp;string
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getNamespace">getNamespace</a>()
@@ -130,14 +130,14 @@
                     static&nbsp;mixed
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_plugin">plugin</a>($namespace)
+                    <a href="#method_plugin">plugin</a>($namespace = null)
         
                                             <p>Get Lumen Plugin Instance</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    void
+                    
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_loadConfigurations">loadConfigurations</a>()
@@ -357,7 +357,7 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="Illuminate\Http\Request">Request</abbr>
+                    
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_request">request</a>()
@@ -442,7 +442,7 @@
                 <div class="col-md-8 type">
                     <a href="#method_recursiveCollection">recursiveCollection</a>(array $array)
         
-                                            <p>Recursive Collection</p>                </div>
+                                            <p>Get an Instance of A Recursive Collection</p>                </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -453,7 +453,7 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at         line 14</div>
+        <div class="location">at         line 15</div>
         <code>                    
     <strong>__construct</strong>($app)
         </code>
@@ -493,8 +493,8 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getNamespace">
-        <div class="location">at         line 27</div>
-        <code>                    string
+        <div class="location">at         line 29</div>
+        <code>        static            string
     <strong>getNamespace</strong>()
         </code>
     </h3>
@@ -523,9 +523,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_plugin">
-        <div class="location">at         line 36</div>
+        <div class="location">at         line 43</div>
         <code>        static            mixed
-    <strong>plugin</strong>($namespace)
+    <strong>plugin</strong>($namespace = null)
         </code>
     </h3>
     <div class="details">
@@ -541,7 +541,7 @@
                     <tr>
                 <td></td>
                 <td>$namespace</td>
-                <td></td>
+                <td>mixed</td>
             </tr>
             </table>
 
@@ -563,8 +563,8 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_loadConfigurations">
-        <div class="location">at         line 48</div>
-        <code>                    void
+        <div class="location">at         line 60</div>
+        <code>                    
     <strong>loadConfigurations</strong>()
         </code>
     </h3>
@@ -573,18 +573,9 @@
     
 
                     <div class="method-description">
-                                    <p>Load Configurations.</p>                                                </div>
+                                    <p>Load Configurations.</p>                    <p>@return void</p>                            </div>
                 <div class="tags">
             
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>void</td>
-            <td></td>
-        </tr>
-    </table>
-
             
             
                     </div>
@@ -593,7 +584,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_app">
-        <div class="location">at         line 59</div>
+        <div class="location">at         line 71</div>
         <code>                    <abbr title="Illuminate\Contracts\Foundation\Application">Application</abbr>
     <strong>app</strong>()
         </code>
@@ -623,7 +614,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_session">
-        <div class="location">at         line 67</div>
+        <div class="location">at         line 80</div>
         <code>                    <abbr title="Illuminate\Session\SessionServiceProvider">SessionServiceProvider</abbr>
     <strong>session</strong>()
         </code>
@@ -653,7 +644,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_wpHelper">
-        <div class="location">at         line 75</div>
+        <div class="location">at         line 89</div>
         <code>                    <a href="../../App/Helpers/WpHelper.html"><abbr title="App\Helpers\WpHelper">WpHelper</abbr></a>
     <strong>wpHelper</strong>()
         </code>
@@ -683,7 +674,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_cache">
-        <div class="location">at         line 83</div>
+        <div class="location">at         line 98</div>
         <code>                    <abbr title="Illuminate\Cache\CacheManager">CacheManager</abbr>
     <strong>cache</strong>()
         </code>
@@ -713,7 +704,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_auth">
-        <div class="location">at         line 91</div>
+        <div class="location">at         line 107</div>
         <code>                    <abbr title="Illuminate\Auth\AuthManager">AuthManager</abbr>
     <strong>auth</strong>()
         </code>
@@ -743,7 +734,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_asset">
-        <div class="location">at         line 99</div>
+        <div class="location">at         line 116</div>
         <code>                    string
     <strong>asset</strong>($url)
         </code>
@@ -783,7 +774,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_abort">
-        <div class="location">at         line 114</div>
+        <div class="location">at         line 131</div>
         <code>                    void
     <strong>abort</strong>(int $code, string $message = &#039;&#039;, array $headers = [])
         </code>
@@ -846,7 +837,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_make">
-        <div class="location">at         line 126</div>
+        <div class="location">at         line 142</div>
         <code>                    mixed|<abbr title="Laravel\Lumen\Application">Application</abbr>
     <strong>make</strong>(string $make)
         </code>
@@ -886,7 +877,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_base_path">
-        <div class="location">at         line 137</div>
+        <div class="location">at         line 152</div>
         <code>                    string
     <strong>base_path</strong>(string $path = &#039;&#039;)
         </code>
@@ -926,7 +917,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_decrypt">
-        <div class="location">at         line 148</div>
+        <div class="location">at         line 162</div>
         <code>                    string
     <strong>decrypt</strong>(string $value)
         </code>
@@ -966,7 +957,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_dispatch">
-        <div class="location">at         line 159</div>
+        <div class="location">at         line 172</div>
         <code>                    mixed
     <strong>dispatch</strong>(mixed $job)
         </code>
@@ -1006,7 +997,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_config">
-        <div class="location">at         line 173</div>
+        <div class="location">at         line 184</div>
         <code>                    mixed
     <strong>config</strong>(array|string $key = null, mixed $default = null)
         </code>
@@ -1051,7 +1042,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_database_path">
-        <div class="location">at         line 191</div>
+        <div class="location">at         line 202</div>
         <code>                    string
     <strong>database_path</strong>(string $path = &#039;&#039;)
         </code>
@@ -1091,7 +1082,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_encrypt">
-        <div class="location">at         line 202</div>
+        <div class="location">at         line 212</div>
         <code>                    string
     <strong>encrypt</strong>(string $value)
         </code>
@@ -1131,7 +1122,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_env">
-        <div class="location">at         line 214</div>
+        <div class="location">at         line 223</div>
         <code>                    mixed
     <strong>env</strong>(string $key, mixed $default = null)
         </code>
@@ -1176,7 +1167,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_event">
-        <div class="location">at         line 255</div>
+        <div class="location">at         line 263</div>
         <code>                    array|null
     <strong>event</strong>(object|string $event, mixed $payload = [], bool $halt = false)
         </code>
@@ -1226,7 +1217,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_factory">
-        <div class="location">at         line 266</div>
+        <div class="location">at         line 273</div>
         <code>                    <abbr title="Illuminate\Database\Eloquent\FactoryBuilder">FactoryBuilder</abbr>
     <strong>factory</strong>()
         </code>
@@ -1256,7 +1247,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_info">
-        <div class="location">at         line 290</div>
+        <div class="location">at         line 296</div>
         <code>                    void
     <strong>info</strong>(string $message, array $context = [])
         </code>
@@ -1301,7 +1292,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_redirect">
-        <div class="location">at         line 304</div>
+        <div class="location">at         line 309</div>
         <code>                    <abbr title="Laravel\Lumen\Http\Redirector">Redirector</abbr>|<abbr title="Illuminate\Http\RedirectResponse">RedirectResponse</abbr>
     <strong>redirect</strong>(string|null $to = null, int $status = 302, array $headers = [], bool $secure = null)
         </code>
@@ -1356,7 +1347,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_resource_path">
-        <div class="location">at         line 320</div>
+        <div class="location">at         line 325</div>
         <code>                    string
     <strong>resource_path</strong>(string $path = &#039;&#039;)
         </code>
@@ -1396,7 +1387,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_validator">
-        <div class="location">at         line 329</div>
+        <div class="location">at         line 334</div>
         <code>                    <abbr title="Illuminate\Validation\Validator">Validator</abbr>
     <strong>validator</strong>()
         </code>
@@ -1426,8 +1417,8 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_request">
-        <div class="location">at         line 338</div>
-        <code>                    <abbr title="Illuminate\Http\Request">Request</abbr>
+        <div class="location">at         line 342</div>
+        <code>                    
     <strong>request</strong>()
         </code>
     </h3>
@@ -1436,18 +1427,9 @@
     
 
                     <div class="method-description">
-                                    <p>Return the current request from the application.</p>                                                </div>
+                                    <p>Return the current request from the application.</p>                    <p>@return \Illuminate\Http\Request</p>                            </div>
                 <div class="tags">
             
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td><abbr title="Illuminate\Http\Request">Request</abbr></td>
-            <td></td>
-        </tr>
-    </table>
-
             
             
                     </div>
@@ -1456,7 +1438,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_response">
-        <div class="location">at         line 351</div>
+        <div class="location">at         line 354</div>
         <code>                    <abbr title="Illuminate\Http\Response">Response</abbr>|<abbr title="Laravel\Lumen\Http\ResponseFactory">ResponseFactory</abbr>
     <strong>response</strong>(string $content = &#039;&#039;, int $status = 200, array $headers = [])
         </code>
@@ -1506,7 +1488,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_route">
-        <div class="location">at         line 370</div>
+        <div class="location">at         line 372</div>
         <code>                    string
     <strong>route</strong>(string $name, array $parameters = [], bool $secure = null)
         </code>
@@ -1556,7 +1538,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_storage_path">
-        <div class="location">at         line 381</div>
+        <div class="location">at         line 382</div>
         <code>                    string
     <strong>storage_path</strong>(string $path = &#039;&#039;)
         </code>
@@ -1646,7 +1628,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_trans_choice">
-        <div class="location">at         line 412</div>
+        <div class="location">at         line 411</div>
         <code>                    string
     <strong>trans_choice</strong>(string $id, int|array|<a target="_blank" href="http://php.net/Countable">Countable</a> $number, array $replace = [], string $locale = null)
         </code>
@@ -1701,7 +1683,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_url">
-        <div class="location">at         line 425</div>
+        <div class="location">at         line 423</div>
         <code>                    string
     <strong>url</strong>(string $path = null, mixed $parameters = [], bool $secure = null)
         </code>
@@ -1751,7 +1733,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_view">
-        <div class="location">at         line 438</div>
+        <div class="location">at         line 435</div>
         <code>                    <abbr title="Illuminate\View\View">View</abbr>
     <strong>view</strong>(string $view = null, array $data = [], array $mergeData = [])
         </code>
@@ -1801,7 +1783,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_recursiveCollection">
-        <div class="location">at         line 455</div>
+        <div class="location">at         line 452</div>
         <code>                    mixed
     <strong>recursiveCollection</strong>(array $array)
         </code>
@@ -1811,7 +1793,7 @@
     
 
                     <div class="method-description">
-                                    <p>Recursive Collection</p>                                                </div>
+                                    <p>Get an Instance of A Recursive Collection</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 

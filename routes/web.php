@@ -1,5 +1,6 @@
 <?php
 
+
 $router->group([
 	'prefix'=>'lumen/api', 'middleware' => []
 ], function($router){

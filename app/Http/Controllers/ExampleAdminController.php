@@ -19,16 +19,16 @@ class ExampleAdminController extends Controller
 	    $this->helper = $helper;
 	    $this->request = $this->helper->request();
 	    $this->auth = $this->helper->auth();
+	    //$this->jsonStore = $this->helper->make('settings');
     }
 
 
     public function template(){
-	    if ($this->request->user()->can('update-user', (object) array('ID'=>1))) {
+	    if($this->request->user()->can('update-user', (object) array('ID'=>1))) {
 		    // The user is allowed to update the user object...
 		    //echo 'You Can Update User ID 1';
+            //echo ('<p>Hello '.$this->auth->user()->display_name .'</p>');
 	    }
-	    //echo ('<p>Hello '.$this->auth->user()->display_name .'</p>');
-
 
 	    //Verify WP Nonce instead of CSRF
 	    if (wp_verify_nonce($this->request->get('lumen_nonce'), 'update') ) {
@@ -49,7 +49,7 @@ class ExampleAdminController extends Controller
 		    ));
 	    }
 
-	    echo $this->helper->view('admin-page-posts', array(
+	    return $this->helper->view('admin-page-posts', array(
 		    'posts'=>$this->post,
 		    'request'=>$this->request,
 	    ));

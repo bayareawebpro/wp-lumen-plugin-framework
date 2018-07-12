@@ -2,80 +2,66 @@
 use Illuminate\Support\ServiceProvider;
 class DebugbarServiceProvider extends ServiceProvider
 {
-	private $debugBar, $helper, $assetRenderer;
+    protected $debugBar, $helper, $enabled, $assetRenderer;
 
-	public function __construct($app)
-	{
-		parent::__construct($app);
-
-		$this->app = $app;
-		$this->helper = $this->app->make('lumenHelper');
-		$this->debugBar = null;
-	}
+    public function __construct($app)
+    {
+        parent::__construct($app);
+        $this->app = $app;
+        $this->helper = $this->app->make('lumenHelper');
+        $this->debugBar = null;
+        $this->enabled = config('app.debug', false);
+    }
 
     public function register()
     {
-	    if(env('APP_DEBUG')) {
-		    $this->app->alias('Debugbar', 'Barryvdh\Debugbar\Facade'); //optional
-		    $this->app->register(\Barryvdh\Debugbar\LumenServiceProvider::class);
-		    $this->app->configure('debugbar');
-		    $this->debugBar = $this->app->makeWith('debugbar', array(
-			    'request' => $this->helper->request(),
-			    'response' => $this->helper->response()
-		    ));
+        if (!$this->enabled) return;
+        /** @var $debugBar \DebugBar\DebugBar */
+        $this->debugBar = $this->app->make('debugbar');
 
-		    $this->debugBar->enable();
-
-		    if(defined( 'SAVEQUERIES')){
-			    $this->debugBar->addCollector(new \App\Helpers\DebugBarWordpressDbCollector());
-		    }else{
-			    $this->debugBar->addMessage('Add define("SAVEQUERIES") to wp-config.php to enable the WP Query Collector', 'WpLumen');
-		    }
-
-		    $this->app->singleton('debugbar', function(){
-			    return  $this->debugBar;
-		    });
-
-	    }
+        /** @var $assetRenderer \DebugBar\JavascriptRenderer */
+        $this->assetRenderer = $this->debugBar->getJavascriptRenderer();
+        $this->assetRenderer->disableVendor('jquery');
+        $this->assetRenderer->setEnableJqueryNoConflict(false);
     }
 
-	public function boot()
-	{
-		if(env('APP_DEBUG')) {
-			$this->helper->wpHelper()
-			             ->addAction( 'admin_head', function () {
-				             $this->renderHeader();
-			             }, 100 )
-			             ->addAction( 'wp_head', function () {
-				             $this->renderHeader();
-			             }, 100 )
-			             ->addAction( 'admin_print_footer_scripts', function () {
-				             $this->renderFooter();
-			             }, 100 )
-			             ->addAction( 'wp_footer', function () {
-				             $this->renderFooter();
-			             }, 100 );
-		}
-	}
+    public function boot()
+    {
+        if (!$this->enabled) return;
 
-	private function renderHeader(){
-		$this->assetRenderer = $this->debugBar->getJavascriptRenderer(site_url(), '/');
-		$this->assetRenderer->setEnableJqueryNoConflict(false);
-		$this->assetRenderer->setIncludeVendors(true);
-		$this->assetRenderer->disableVendor('jquery');
-		?>
-		<style type="text/css">
-			<?php $this->assetRenderer->dumpCssAssets(); ?>
-		</style>
-		<?php
-		echo $this->assetRenderer->renderHead();
-	}
-	private function renderFooter(){
-		?>
-		<script type="text/javascript">
-			<?php $this->assetRenderer->dumpJsAssets(); ?>
-		</script>
-		<?php
-		echo $this->assetRenderer->render();
-	}
+        if(defined( 'SAVEQUERIES')){
+            $this->debugBar->addCollector(new \App\Helpers\DebugBarWordpressDbCollector());
+        }else{
+            $this->debugBar->addMessage('Add define("SAVEQUERIES") to wp-config.php to enable the WP Query Collector', 'WpLumen');
+        }
+
+        /** Include Debugbar Assets */
+        $this->helper->wpHelper()
+            ->addAction('admin_head', function() {
+                $this->renderHeader();
+            }, 1000)
+            ->addAction('wp_head', function() {
+                $this->renderHeader();
+            }, 1000)
+            ->addAction('admin_print_footer_scripts', function() {
+                $this->renderFooter();
+            }, 1000)
+            ->addAction('wp_footer', function() {
+                $this->renderFooter();
+            }, 1000);
+    }
+
+    private function renderHeader()
+    {
+        $url = $this->helper->request()->url();
+        $scheme = parse_url($url, PHP_URL_SCHEME).':';
+        $urlBase = str_replace($scheme, '', $url);
+        $assets = str_replace($urlBase.'/', '/', $this->assetRenderer->renderHead());
+        echo $assets;
+    }
+
+    private function renderFooter()
+    {
+        echo $this->assetRenderer->render();
+    }
 }

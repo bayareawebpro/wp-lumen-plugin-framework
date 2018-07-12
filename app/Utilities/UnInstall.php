@@ -20,6 +20,7 @@ class UnInstall{
      */
     public function __construct()
     {
+        $this->app = \App\Helpers\LumenHelper::plugin()->config();
         $this->schema();
         $this->data();
     }
@@ -31,7 +32,7 @@ class UnInstall{
     {
 
 //	    Artisan::call('migrate:rollback');
-//	    Schema::dropIfExists('wp_migrations');
+//	    Schema::dropIfExists('migrations');
 
     }
 

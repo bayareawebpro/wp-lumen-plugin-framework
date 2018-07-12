@@ -46,7 +46,5 @@ return [
     | value to get prefixed to all our keys so we can avoid collisions.
     |
     */
-
     'prefix' => 'wplumen_cache',
-
 ];

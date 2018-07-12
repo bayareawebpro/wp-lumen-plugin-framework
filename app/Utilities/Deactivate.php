@@ -3,7 +3,6 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
-
 class DeActivate{
 
 	private $app;
@@ -22,9 +21,9 @@ class DeActivate{
      */
     public function __construct()
     {
-//    	$this->app = LumenHelper::plugin(__NAMESPACE__);
-//        $this->schema();
-//        $this->data();
+        $this->app = \App\Helpers\LumenHelper::plugin('App')->config();
+        $this->schema();
+        $this->data();
     }
 
     /**
@@ -32,7 +31,10 @@ class DeActivate{
      */
     public function schema()
     {
-
+        if(config('session.driver') === 'database') {
+            Artisan::call('migrate:rollback');
+            Schema::dropIfExists(config('session.table'));
+        }
     }
 
     /**

@@ -149,11 +149,22 @@ class WordpressServiceProvider extends ServiceProvider
 		    ->addAdminSubPanel(
 			    'lumen_page',
 			    'lumen_sub_page',
-			    'WP-Lumen SubPage',
-			    'WP-Lumen SubPage',
+			    'WpPost Demo',
+			    'WpPost Demo',
 			    function(){
 				    $this->lumenHelper
 					    ->response($this->app->call( '\App\Http\Controllers\ExampleAdminController@template'))
+					    ->sendContent();
+			    },
+			    'read'
+		    )->addAdminSubPanel(
+			    'lumen_page',
+			    'lumen_settings',
+			    'Settings',
+			    'Settings',
+			    function(){
+				    $this->lumenHelper
+					    ->response($this->app->call( '\App\Http\Controllers\SettingsController@template'))
 					    ->sendContent();
 			    },
 			    'read'
