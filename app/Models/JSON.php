@@ -42,7 +42,7 @@ class JSON{
     /**
      * Forget Key / Value Pair in the JSON storage file.
      * @param $key
-     * @return $this
+     * @return self
      */
     public function forget($key)
     {
@@ -54,7 +54,7 @@ class JSON{
      * Set a key / value pair entry in the JSON storage file.
      * @param $request array (key/value pair)
      * @param bool $overwrite
-     * @return $this
+     * @return self
      */
     public function set($request, $overwrite = true)
     {
@@ -66,7 +66,7 @@ class JSON{
      * Get a key / value pair entry from the JSON storage file.
      * @param $key
      * @param null $default
-     * @return $this
+     * @return string
      */
     public function get($key, $default = null)
     {
@@ -75,7 +75,7 @@ class JSON{
 
     /**
      * Get all entries from the JSON storage file.
-     * @return null
+     * @return array|null
      */
     public function all()
     {
@@ -84,7 +84,7 @@ class JSON{
 
     /**
      * Save the JSON storage file.
-     * @return $this
+     * @return self
      */
     public function save()
     {
@@ -95,7 +95,7 @@ class JSON{
 
     /**
      * Touch the JSON storage file.
-     * @return $this
+     * @return self
      */
     private function touchFile()
     {
@@ -107,7 +107,7 @@ class JSON{
 
     /**
      * Flush the JSON storage file.
-     * @return $this
+     * @return self
      */
     public function flush()
     {

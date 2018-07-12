@@ -1,4 +1,6 @@
 {
     "/build/example.js": "/build/example.js",
-    "/build/example.css": "/build/example.css"
+    "/build/example.css": "/build/example.css",
+    "/build/example.js.map": "/build/example.js.map",
+    "/build/example.css.map": "/build/example.css.map"
 }
