@@ -98,12 +98,12 @@ window.projectVersion = 'master';
             
             {"type": "Class", "fromName": "App\\Models", "fromLink": "App/Models.html", "link": "App/Models/JSON.html", "name": "App\\Models\\JSON", "doc": "&quot;&quot;"},
                                                         {"type": "Method", "fromName": "App\\Models\\JSON", "fromLink": "App/Models/JSON.html", "link": "App/Models/JSON.html#method___construct", "name": "App\\Models\\JSON::__construct", "doc": "&quot;JSON constructor.&quot;"},
-                    {"type": "Method", "fromName": "App\\Models\\JSON", "fromLink": "App/Models/JSON.html", "link": "App/Models/JSON.html#method_forget", "name": "App\\Models\\JSON::forget", "doc": "&quot;Forget Key \/ Value Pair&quot;"},
-                    {"type": "Method", "fromName": "App\\Models\\JSON", "fromLink": "App/Models/JSON.html", "link": "App/Models/JSON.html#method_set", "name": "App\\Models\\JSON::set", "doc": "&quot;&quot;"},
-                    {"type": "Method", "fromName": "App\\Models\\JSON", "fromLink": "App/Models/JSON.html", "link": "App/Models/JSON.html#method_get", "name": "App\\Models\\JSON::get", "doc": "&quot;&quot;"},
-                    {"type": "Method", "fromName": "App\\Models\\JSON", "fromLink": "App/Models/JSON.html", "link": "App/Models/JSON.html#method_all", "name": "App\\Models\\JSON::all", "doc": "&quot;&quot;"},
-                    {"type": "Method", "fromName": "App\\Models\\JSON", "fromLink": "App/Models/JSON.html", "link": "App/Models/JSON.html#method_save", "name": "App\\Models\\JSON::save", "doc": "&quot;&quot;"},
-                    {"type": "Method", "fromName": "App\\Models\\JSON", "fromLink": "App/Models/JSON.html", "link": "App/Models/JSON.html#method_flush", "name": "App\\Models\\JSON::flush", "doc": "&quot;&quot;"},
+                    {"type": "Method", "fromName": "App\\Models\\JSON", "fromLink": "App/Models/JSON.html", "link": "App/Models/JSON.html#method_forget", "name": "App\\Models\\JSON::forget", "doc": "&quot;Forget Key \/ Value Pair in the JSON storage file.&quot;"},
+                    {"type": "Method", "fromName": "App\\Models\\JSON", "fromLink": "App/Models/JSON.html", "link": "App/Models/JSON.html#method_set", "name": "App\\Models\\JSON::set", "doc": "&quot;Set a key \/ value pair entry in the JSON storage file.&quot;"},
+                    {"type": "Method", "fromName": "App\\Models\\JSON", "fromLink": "App/Models/JSON.html", "link": "App/Models/JSON.html#method_get", "name": "App\\Models\\JSON::get", "doc": "&quot;Get a key \/ value pair entry from the JSON storage file.&quot;"},
+                    {"type": "Method", "fromName": "App\\Models\\JSON", "fromLink": "App/Models/JSON.html", "link": "App/Models/JSON.html#method_all", "name": "App\\Models\\JSON::all", "doc": "&quot;Get all entries from the JSON storage file.&quot;"},
+                    {"type": "Method", "fromName": "App\\Models\\JSON", "fromLink": "App/Models/JSON.html", "link": "App/Models/JSON.html#method_save", "name": "App\\Models\\JSON::save", "doc": "&quot;Save the JSON storage file.&quot;"},
+                    {"type": "Method", "fromName": "App\\Models\\JSON", "fromLink": "App/Models/JSON.html", "link": "App/Models/JSON.html#method_flush", "name": "App\\Models\\JSON::flush", "doc": "&quot;Flush the JSON storage file.&quot;"},
             
             {"type": "Class", "fromName": "App\\Models", "fromLink": "App/Models.html", "link": "App/Models/WpComment.html", "name": "App\\Models\\WpComment", "doc": "&quot;&quot;"},
                     

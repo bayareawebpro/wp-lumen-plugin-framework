@@ -1,10 +1,6 @@
 <?php namespace App\Models;
-
 use App\Helpers\LumenHelper;
-
-class JSON
-{
-
+class JSON{
     /** @var $files \Illuminate\Filesystem\Filesystem */
     /** @var $logger \Illuminate\Log\Logger */
     protected $lumenHelper, $files, $logger;
@@ -31,7 +27,7 @@ class JSON
     }
 
     /**
-     * Init Storage Bin
+     * Init Storage Bin for the JSON storage file.
      */
     private function initBin()
     {
@@ -44,7 +40,7 @@ class JSON
     }
 
     /**
-     * Forget Key / Value Pair
+     * Forget Key / Value Pair in the JSON storage file.
      * @param $key
      * @return $this
      */
@@ -55,6 +51,7 @@ class JSON
     }
 
     /**
+     * Set a key / value pair entry in the JSON storage file.
      * @param $request array (key/value pair)
      * @param bool $overwrite
      * @return $this
@@ -66,6 +63,7 @@ class JSON
     }
 
     /**
+     * Get a key / value pair entry from the JSON storage file.
      * @param $key
      * @param null $default
      * @return $this
@@ -76,6 +74,7 @@ class JSON
     }
 
     /**
+     * Get all entries from the JSON storage file.
      * @return null
      */
     public function all()
@@ -84,6 +83,7 @@ class JSON
     }
 
     /**
+     * Save the JSON storage file.
      * @return $this
      */
     public function save()
@@ -94,6 +94,7 @@ class JSON
     }
 
     /**
+     * Touch the JSON storage file.
      * @return $this
      */
     private function touchFile()
@@ -105,6 +106,7 @@ class JSON
     }
 
     /**
+     * Flush the JSON storage file.
      * @return $this
      */
     public function flush()
