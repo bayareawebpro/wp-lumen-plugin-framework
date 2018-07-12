@@ -4,7 +4,7 @@ class WpHelper {
 	protected $app, $lumenHelper;
 
 	/**
-	 * Add Admin Notice
+	 * WpHelper Constructor
 	 * @param $app \Illuminate\Contracts\Foundation\Application
 	 */
 	public function __construct($app){
@@ -13,27 +13,66 @@ class WpHelper {
 	}
 
 	/**
-	 * Adds Page to a WordPress navmenu
-	 * @param [int] $page_id    The ID of the page you want to add
-	 * @param [str] $page_title Title of menu item
-	 * @param [int] $menu_id    NavMenu ID
-	 * @param [int] $parent     (Optional) Menu item Parent ID
+	 * Adds Page to a WordPress NavMenu
+	 * @param int $page_id (The ID of the page you want to add)
+	 * @param string $page_title (Title of menu item)
+	 * @param int $menu_id  (NavMenu ID)
+	 * @param int $parent  (Optional - Menu item Parent ID)
+     * @return self
 	 */
 	function addMenuLink($page_id, $page_title, $menu_id, $parent = 0){
-		wp_update_nav_menu_item($menu_id, 0,
-			array(  'menu-item-title' => $page_title,
-			        'menu-item-object' => 'page',
-			        'menu-item-object-id' => $page_id,
-			        'menu-item-type' => 'post_type',
-			        'menu-item-status' => 'publish',
-			        'menu-item-parent-id' => $parent));
+		wp_update_nav_menu_item($menu_id, 0, array(
+		    'menu-item-title' => $page_title,
+            'menu-item-object' => 'page',
+            'menu-item-object-id' => $page_id,
+            'menu-item-type' => 'post_type',
+            'menu-item-status' => 'publish',
+            'menu-item-parent-id' => $parent
+        ));
+        return $this;
 	}
+
+    /**
+     * Add REST API Route
+     * @param string $namespace
+     * @param string $route
+     * @param array|string $methods
+     * @param array $options
+     * @return self
+     */
+    public function addRestRoute($namespace, $route, $options = array()){
+        $methods = [];
+        $methodMap = array(
+            'get' => \WP_REST_Server::READABLE,
+            'post' => \WP_REST_Server::CREATABLE,
+            'put' => \WP_REST_Server::EDITABLE,
+            'patch' => \WP_REST_Server::EDITABLE,
+            'delete' => \WP_REST_Server::DELETABLE,
+            'all' => \WP_REST_Server::ALLMETHODS,
+        );
+        foreach($options['methods'] as $method){
+            array_push($methods, $methodMap[$method]);
+        }
+        $options['methods'] = $methods;
+        add_action('rest_api_init', function() use ($namespace, $route, $methods, $options) {
+            register_rest_route($namespace, $route, $options);
+        });
+        //add_action('rest_api_init', function() {
+        //    register_rest_route( 'wp-lumen/api/v1', '/phrase', array(
+        //        'methods'  => WP_REST_Server::ALLMETHODS,
+        //        'callback' => function() {
+        //            return rest_ensure_response(array('test'=>'Hello World, this is the WordPress REST API' ));
+        //        },
+        //    ));
+        //});
+        return $this;
+    }
 
 
 	/**
 	 * Add Admin Notice
 	 * @param array $plugin_links
-	 * @return void
+	 * @return self
 	 */
 	public function addPluginLinks($plugin_links = array()){
 		if(!is_admin()) return;
@@ -46,6 +85,7 @@ class WpHelper {
 			}
 			return $existing_links;
 		}, 10, 2);
+        return $this;
 	}
 
 	/**
@@ -62,10 +102,11 @@ class WpHelper {
 	/**
 	 * Add Admin Notice
 	 * @param \Closure $closure
-	 * @return void
+	 * @return self
 	 */
 	public function addAdminNotice(\Closure $closure){
 		add_action('admin_notices', $closure);
+        return $this;
 	}
 
 	/**
@@ -81,10 +122,7 @@ class WpHelper {
 	 */
 	public function addMetaBox($id, $title, $closure, $screen = 'post', $context = 'normal', $priority = 'default', $closure_args = 1 ){
 		if(!is_admin()) return $this;
-
-
 		switch($screen){
-
 			case 'nav-menus':
 				$action = 'admin_head-nav-menus.php';
 				break;
@@ -92,7 +130,6 @@ class WpHelper {
 				$action = 'add_meta_boxes';
 				break;
 		}
-
 		add_action( $action, function() use( $id, $title, $closure, $screen, $context, $priority, $closure_args ){
 			add_meta_box( $id, $title, $closure, $screen, $context, $priority, $closure_args );
 		});
@@ -105,13 +142,11 @@ class WpHelper {
 	 * @return self
 	 */
 	public function addWidget($class){
-
 		add_action('widgets_init', function() use ($class){
 			register_widget($this->app->build($class));
 		});
 		return $this;
 	}
-
 
 	/**
 	 * Add Widget
@@ -122,7 +157,6 @@ class WpHelper {
 	 */
 	public function addDashboardWidget($id, $name, $closure){
 		if(!is_admin()) return $this;
-
 		add_action('wp_dashboard_setup', function() use ($id, $name, $closure){
 			wp_add_dashboard_widget(
 				$id,
@@ -132,8 +166,6 @@ class WpHelper {
 		});
 		return $this;
 	}
-
-
 
 	/**
 	 * Add Admin Panel
@@ -217,7 +249,6 @@ class WpHelper {
 		return $this;
 	}
 
-
 	/**
 	 * Enqueue Style
 	 * @param string $handle
@@ -228,7 +259,6 @@ class WpHelper {
 	 * @return self
 	 */
 	public function enqueueStyle($handle, $src, $dependencies = array(), $version = '1.0.0', $media = 'all'){
-
 		add_action('wp_enqueue_scripts', function() use ($handle, $src, $dependencies, $version, $media){
 			wp_enqueue_style($handle, $src, $dependencies, $version, $media);
 		});
@@ -253,7 +283,7 @@ class WpHelper {
 
 	/**
 	 * Get Wp Global Post Object
-	 * @return object
+	 * @return \WP_Post
 	 */
 	public function getGlobalPost(){
 		global $post;
@@ -265,7 +295,6 @@ class WpHelper {
 	 * @return array
 	 */
 	public static function getWpDatabaseConnection(){
-
 		global $wpdb;
 		return [
 			'driver'    => 'mysql',

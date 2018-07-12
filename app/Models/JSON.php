@@ -58,7 +58,9 @@ class JSON{
      */
     public function set($request, $overwrite = true)
     {
-        $this->bin[$request['key']] = $request['value'];
+        if(isset($request['key']) && isset($request['value'])){
+            $this->bin[$request['key']] = $request['value'];
+        }
         return $this;
     }
 

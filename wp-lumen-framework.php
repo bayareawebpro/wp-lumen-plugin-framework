@@ -24,7 +24,6 @@
 */
 putenv('APP_ENV=local');
 putenv('APP_DEBUG=true');
-
 /*
 |--------------------------------------------------------------------------
 | Create The Application

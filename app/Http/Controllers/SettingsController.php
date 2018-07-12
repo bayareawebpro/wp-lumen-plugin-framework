@@ -21,7 +21,6 @@ class SettingsController extends Controller
 	    $this->settings = $this->helper->make('settings');
         $this->data();
     }
-
     private function data(){
         if($this->request->filled('action')){
             switch($this->request->get('action')){
@@ -38,7 +37,6 @@ class SettingsController extends Controller
             $this->settings->save();
         }
     }
-
     public function template(){
 	    return $this->helper->view('admin-settings', array(
 	        'settings' => $this->settings

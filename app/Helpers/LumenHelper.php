@@ -186,11 +186,9 @@ class LumenHelper
         if (is_null($key)) {
             return $this->app->make('config');
         }
-
         if (is_array($key)) {
             return $this->app->make('config')->set($key);
         }
-
         return $this->app->make('config')->get($key, $default);
     }
 
@@ -223,11 +221,9 @@ class LumenHelper
     function env($key, $default = null)
     {
         $value = getenv($key);
-
         if ($value === false) {
             return value($default);
         }
-
         switch (strtolower($value)) {
             case 'true':
             case '(true)':
@@ -245,11 +241,9 @@ class LumenHelper
             case '(null)':
                 return;
         }
-
         if (Str::startsWith($value, '"') && Str::endsWith($value, '"')) {
             return substr($value, 1, -1);
         }
-
         return $value;
     }
 
@@ -272,12 +266,9 @@ class LumenHelper
      */
     function factory()
     {
-        $this->app->make('db');
-
-        $factory = $this->app->make('Illuminate\Database\Eloquent\Factory');
-
         $arguments = func_get_args();
-
+        $this->app->make('db');
+        $factory = $this->app->make('Illuminate\Database\Eloquent\Factory');
         if (isset($arguments[1]) && is_string($arguments[1])) {
             return $factory->of($arguments[0], $arguments[1])->times(isset($arguments[2]) ? $arguments[2] : null);
         } elseif (isset($arguments[1])) {
@@ -309,11 +300,9 @@ class LumenHelper
     function redirect($to = null, $status = 302, $headers = [], $secure = null)
     {
         $redirector = new \Laravel\Lumen\Http\Redirector($this->app);
-
         if (is_null($to)) {
             return $redirector;
         }
-
         return $redirector->to($to, $status, $headers, $secure);
     }
 
@@ -354,11 +343,9 @@ class LumenHelper
     function response($content = '', $status = 200, array $headers = [])
     {
         $factory = new \Laravel\Lumen\Http\ResponseFactory;
-
         if (func_num_args() === 0) {
             return $factory;
         }
-
         return $factory->make($content, $status, $headers);
     }
 
@@ -396,7 +383,6 @@ class LumenHelper
         if (is_null($id)) {
             return $this->app->make('translator');
         }
-
         return $this->app->make('translator')->trans($id, $replace, $locale);
     }
 
@@ -435,13 +421,10 @@ class LumenHelper
     function view($view = null, $data = [], $mergeData = [])
     {
         $factory = $this->app->make('view');
-
         if (func_num_args() === 0) {
             return $factory;
         }
         return $factory->make($view, $data, $mergeData);
-
-
     }
 
     /**

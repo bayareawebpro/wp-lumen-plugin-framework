@@ -133,6 +133,15 @@ class WordpressServiceProvider extends ServiceProvider
 			    }
 		    );
 
+        /** Add WP Rest API Route **/
+//        $this->wpHelper
+//            ->addRestRoute('wp-lumen/api/v1', '/test', array(
+//                'methods'  => ['get'],
+//                'callback' => function(){
+//                    return $this->app->call( '\App\Http\Controllers\ExampleWpRestRouteController@get');
+//                },
+//            ));
+
 	    /** Add Dashboard Panels **/
 	    $this->wpHelper
 		    ->addAdminPanel(

@@ -14,29 +14,23 @@ export default {
 	},
 	mounted() {
 		console.log('Lumen Auth Login Component Mounted.')
-		//let _root = this;
-		// if(_root.auth_user && _root.auth_user.user_email){
-		// 	_root.redirectHome();
-		// }
 	},
 	methods: {
 		submitLogin(event){
-			let _root = this;
-
-			_root.errors = {};
+			this.errors = {}
 			axios
-				.post('/lumen/api/auth/login', _root.user)
-				.then(function (response) {
-					_root.redirectHome();
+				.post('/lumen/api/auth/login', this.user)
+				.then((response) => {
+                    this.redirectHome()
 				})
-				.catch(function (error) {
+				.catch((error)  => {
 					if(error.response && error.response.data){
-						_root.errors = error.response.data;
+                        this.errors = error.response.data
 					}
-				});
+				})
 		},
 		redirectHome(){
-			window.location.replace("/");
+			window.location.replace("/")
 		}
 	}
 }

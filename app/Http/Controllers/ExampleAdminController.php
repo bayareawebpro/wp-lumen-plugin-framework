@@ -19,7 +19,6 @@ class ExampleAdminController extends Controller
 	    $this->helper = $helper;
 	    $this->request = $this->helper->request();
 	    $this->auth = $this->helper->auth();
-	    //$this->jsonStore = $this->helper->make('settings');
     }
 
 

@@ -1,5 +1,5 @@
 <?php
-
+/** @var $router \Illuminate\Routing\Router */
 
 $router->group([
 	'prefix'=>'lumen/api', 'middleware' => []
@@ -8,6 +8,7 @@ $router->group([
 	$router->post('auth/register', 'Auth\AuthController@register');
 	$router->get('auth/logout', 'Auth\AuthController@logout');
 });
+
 $router->get('test-theme','ExampleRouteThemeViewController@show');
 
 //$router->get('/key-generate', function() {

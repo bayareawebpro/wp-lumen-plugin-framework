@@ -16,33 +16,29 @@
 		},
 		mounted() {
 			console.log('Lumen Auth Register Component Mounted.')
-			// let _root = this;
-			// if(_root.auth_user && _root.auth_user.user_email){
-			// 	_root.redirectHome();
-			// }
 		},
 		methods: {
 			submitRegistration(event){
-				let _root = this;
-				_root.errors = {};
+				this.errors = {}
 				axios
-					.post('/lumen/api/auth/register', _root.user)
-					.then(function (response) {
-						_root.redirectHome();
-						if(typeof(response.data) !== 'undefined'){
-							console.log(response.data);
+					.post('/lumen/api/auth/register', this.user)
+					.then((response) => {
+                        if(typeof(response.data) !== 'undefined'){
+                            console.log(response.data)
+                        }else{
+                            this.redirectHome()
 						}
 					})
-					.catch(function (error) {
+					.catch((error)  => {
 						if(typeof(error.response.data) !== 'undefined'){
-							_root.errors = error.response.data;
+                            this.errors = error.response.data
 						}else{
-							alert('Whoops, the server encountered an error processing the request.  Please try again.');
+							alert('Whoops, the server encountered an error processing the request.  Please try again.')
 						}
-					});
+					})
 			},
 			redirectHome(){
-				window.location.replace("/");
+				window.location.replace("/")
 			}
 		}
 	}
@@ -59,7 +55,7 @@
 			<div class="control-group" v-bind:class="{ 'has-error': errors.display_name }">
 				<label class="control-label" for="display_name">Display Name</label>
 				<div class="controls">
-					<input type="text" name="display_name" v-model="user.display_name" placeholder="" class="form-control" required>
+					<input type="text" name="display_name" id="display_name" v-model="user.display_name" placeholder="" class="form-control" required>
 					<div class="help-block" v-if="errors">
 						<ul class="list-unstyled">
 							<li v-for="error in errors.display_name">
@@ -72,7 +68,7 @@
 			<div class="control-group" v-bind:class="{ 'has-error': errors.user_email }">
 				<label class="control-label" for="user_email">E-mail</label>
 				<div class="controls">
-					<input type="text" name="user_email" v-model="user.user_email" placeholder="" class="form-control">
+					<input type="text" name="user_email" id="user_email" v-model="user.user_email" placeholder="" class="form-control">
 					<div class="help-block" v-if="errors">
 						<ul class="list-unstyled">
 							<li v-for="error in errors.user_email">
@@ -85,7 +81,7 @@
 			<div class="control-group" v-bind:class="{ 'has-error': errors.user_pass }">
 				<label class="control-label" for="user_pass">Password</label>
 				<div class="controls">
-					<input type="user_pass" name="user_pass" v-model="user.user_pass" placeholder="" class="form-control">
+					<input type="user_pass" id="user_pass" name="user_pass" v-model="user.user_pass" placeholder="" class="form-control">
 					<div class="help-block" v-if="errors">
 						<ul class="list-unstyled">
 							<li v-for="error in errors.user_pass">
@@ -96,9 +92,9 @@
 				</div>
 			</div>
 			<div class="control-group" v-bind:class="{ 'has-error': errors.user_pass }">
-				<label class="control-label"  for="user_pass_confirmation">Password (Confirm)</label>
+				<label class="control-label" for="user_pass_confirmation">Password (Confirm)</label>
 				<div class="controls">
-					<input type="user_pass" name="user_pass_confirmation" v-model="user.user_pass_confirmation" placeholder="" class="form-control">
+					<input type="user_pass" id="user_pass_confirmation" name="user_pass_confirmation" v-model="user.user_pass_confirmation" placeholder="" class="form-control">
 					<div class="help-block" v-if="errors">
 						<ul class="list-unstyled">
 							<li v-for="error in errors.user_pass_confirmation">
