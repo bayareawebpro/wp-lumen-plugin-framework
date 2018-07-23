@@ -6,7 +6,6 @@ WP Lumen Plugin Framework provides an architecture that allows rapid development
 
 ![](https://cdn.rawgit.com/bayareawebpro/wp-lumen-plugin-framework/60a708a9/resources/assets/screenshots/preview.png)
 
-
 ## Includes:
 * WP Models
 * Example Controllers, Widgets & Shortcodes
@@ -18,6 +17,9 @@ WP Lumen Plugin Framework provides an architecture that allows rapid development
 * Database Table Mangement (wee wiki example)
 * Activate, Deactive, Uninstall Schema Integration
 * JSON Config Flat-File Store
+* 10ms Boot Time (OPCache)
+
+**Note: My production installation is at WP Engine.
 
 ## Live Demo
 http://wplumen.bayareawebpro.com
