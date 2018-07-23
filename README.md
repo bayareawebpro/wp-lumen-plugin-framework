@@ -17,9 +17,7 @@ WP Lumen Plugin Framework provides an architecture that allows rapid development
 * Database Table Mangement (wee wiki example)
 * Activate, Deactive, Uninstall Schema Integration
 * JSON Config Flat-File Store
-* 10ms Boot Time (OPCache)
-
-**Note: My production installation is at WP Engine.
+* ~10ms Boot Time with OPCache & PHP7
 
 ## Live Demo
 http://wplumen.bayareawebpro.com
