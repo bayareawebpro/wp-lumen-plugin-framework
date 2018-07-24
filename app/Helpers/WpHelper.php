@@ -1,5 +1,6 @@
 <?php namespace App\Helpers;
 
+
 class WpHelper {
 	protected $app, $lumenHelper;
 

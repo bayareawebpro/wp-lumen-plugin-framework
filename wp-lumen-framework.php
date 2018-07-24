@@ -22,7 +22,7 @@
 | To make our plugin portable, we don't use an .env file.  However, if you
 | want to use one, simple add one to the plugin's directory.
 */
-putenv('APP_ENV=local');
+putenv('APP_ENV=production');
 putenv('APP_DEBUG=true');
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ $app = require __DIR__.'/bootstrap/app.php';
 | You can override the error reporting level to disable output and prevent
 | warning thrown by other plugins.
 */
-error_reporting((config('APP_DEBUG') ? E_ALL : 0));
+error_reporting((config('app.debug') ? E_ALL : 0));
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +50,9 @@ error_reporting((config('APP_DEBUG') ? E_ALL : 0));
 | You can resolve each plugin by it's namespace.
 */
 //dd(\App\Helpers\LumenHelper::plugin('App')->config());
+
+if(!function_exists('wpLumen')){
+    function wpLumen($namespace = null){
+        return \App\Helpers\LumenHelper::plugin($namespace);
+    }
+}

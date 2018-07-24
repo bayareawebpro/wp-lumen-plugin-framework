@@ -59,7 +59,9 @@ class JSON{
     public function set($request, $overwrite = true)
     {
         if(isset($request['key']) && isset($request['value'])){
-            $this->bin[$request['key']] = $request['value'];
+            if(!empty($request['key'])){
+                $this->bin[$request['key']] = $request['value'];
+            }
         }
         return $this;
     }
@@ -72,7 +74,7 @@ class JSON{
      */
     public function get($key, $default = null)
     {
-        return isset($this->bin[$key['key']]) ? $this->bin[$key['key']] : $default;
+        return isset($this->bin[$key]) && !empty($this->bin[$key]) ? $this->bin[$key] : $default;
     }
 
     /**

@@ -27,12 +27,9 @@ return [
     */
 
     'connections' => [
-
-
         'log' => [
             'driver' => 'log',
         ],
-
     ],
 
 ];

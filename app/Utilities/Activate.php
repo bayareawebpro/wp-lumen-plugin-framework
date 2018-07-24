@@ -1,15 +1,21 @@
 <?php namespace App\Utilities;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\Schema;
-class Activate extends  Migration{
+class Activate{
+
+    /**
+     * @var $app \Laravel\Lumen\Application
+     * @var $config \Illuminate\Config\Repository
+     * @var $artisan \Illuminate\Contracts\Console\Kernel
+     * @var $schema \Illuminate\Database\Schema\Builder
+     */
+    protected $app, $config, $artisan, $schema;
+
     /**
      * Class Initialization called by Hook (Requires Static Method)
-     * @return Activate
+     * @return self
      */
     public static function init()
     {
+        putenv('APP_ENV=staging');
         return new self();
     }
 
@@ -18,7 +24,10 @@ class Activate extends  Migration{
      */
     public function __construct()
     {
-        $this->app = \App\Helpers\LumenHelper::plugin('App')->config();
+        $this->app = \App\Helpers\LumenHelper::plugin();
+        $this->config = $this->app->make('config');
+        $this->artisan = $this->app->make(\Illuminate\Contracts\Console\Kernel::class);
+        $this->schema = $this->app->make('db')->connection('wp')->getSchemaBuilder();
         $this->schema();
         $this->data();
     }
@@ -28,10 +37,9 @@ class Activate extends  Migration{
      */
     public function schema()
     {
-        if(config('session.driver') === 'database'){
-            Schema::dropIfExists(config('session.table'));
-            Artisan::call('migrate:install');
-            Artisan::call('migrate');
+        if($this->config->get('session.driver', 'file') === 'database'){
+            $this->artisan->call('migrate:install');
+            $this->artisan->call('migrate');
         }
     }
 

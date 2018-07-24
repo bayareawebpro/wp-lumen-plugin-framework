@@ -1,6 +1,5 @@
 <?php namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
-
 class RoutingServiceProvider extends ServiceProvider
 {
     /*
@@ -12,77 +11,67 @@ class RoutingServiceProvider extends ServiceProvider
     | can respond to, as well as the controllers that may handle them.
     */
 
-    /** @var \App\Helpers\LumenHelper $lumenHelper **/
-    /** @var \App\Helpers\WpHelper $wpHelper **/
-    /** @var \Laravel\Lumen\Application $app **/
-
-    protected $wpHelper, $lumenHelper, $config, $app;
+    /**
+     * @var $lumenHelper \App\Helpers\LumenHelper
+     * @var $wpHelper \App\Helpers\WpHelper
+     * @var $request \Illuminate\Http\Request
+     * @var $config \Illuminate\Config\Repository
+     */
+    protected $wpHelper, $lumenHelper, $config, $app, $request;
 
     /**
      * WordpressServiceProvider constructor.
-     * @param $app \Illuminate\Contracts\Foundation\Application
+     * @param $app \Illuminate\Contracts\Foundation\Application|\Laravel\Lumen\Application
      */
-    public function __construct( $app ) {
-        parent::__construct( $app );
+    public function __construct($app) {
+        $this->app = $app;
+        parent::__construct($app);
         $this->lumenHelper = $this->app->make('lumenHelper');
         $this->wpHelper = $this->lumenHelper->wpHelper();
         $this->config = $this->lumenHelper->config();
     }
 
     /**
-     * Register any application services.
+     * Register the application router.
      * @return void
      */
     public function register()
     {
         if (!$this->app->runningInConsole()) {
-            add_action('init', function () {
-                $request = \Illuminate\Http\Request::capture();
-                if (!is_admin()) {
-                    $this->app->router->group([
-                        'namespace' => 'App\Http\Controllers',
-                    ], function ($router) {
-                        require __DIR__ . '/../../routes/web.php';
-                    });
 
-                    //Handle Request
-                    $response = $this->app->handle($request);
+            $this->app->router->group([
+                'namespace' => 'App\Http\Controllers',
+            ], function($router){
+                require __DIR__ . '/../../routes/web.php';
+            });
 
+            add_action('init', function() {
+                //Handle Request
+                $response = $this->app->handle($this->lumenHelper->request()->capture());
+                $response->sendHeaders();
                     //Send Response by Overwriting WP (eager)
-                    if ($this->config->get('router.loading') === 'eager') {
-                        if (!empty($response->content())) {
-                            $response->sendHeaders();
-                            $response->sendContent();
-                            exit($response->status());
-                        }
-                        //Send Response on 404 (lazy)
+                    if ($this->config->get('router.loading', 'eager') === 'eager') {
+                        $this->sendResponse($response);
+                    //Send Response on 404 (lazy)
                     } elseif (is_404()) {
-                        //Send Response During Template Redirect
-                        add_action('template_redirect', function () use ($request, $response) {
-                            if (!empty($response->content())) {
-                                $response->sendHeaders();
-                                $response->sendContent();
-                                exit($response->status());
-                            }
+                        add_action('template_redirect', function () use ($response) {
+                            $this->sendResponse($response);
                         });
                     }
-                } else {
-                    //Handle Request
-                    $response = $this->app->handle($request);
-                    if($response){
-                        $response->sendHeaders();
-                        $response->sendContent();
-                    }
-                }
             });
         }
     }
-
     /**
-     * Boot application services.
+     * Send the Application Response
+     * @param $response \Illuminate\Http\Response
      * @return void
      */
-    public function boot() {
-
+    private function sendResponse($response) {
+        if (!empty($response->content())) {
+            $response->send();
+            if(!is_admin()) {
+                exit;
+            }
+        }
     }
 }

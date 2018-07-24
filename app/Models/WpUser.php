@@ -22,7 +22,9 @@ class WpUser extends Model implements AuthenticatableContract, AuthorizableContr
 	    'user_pass',
 	    'user_registered'
     ];
-
+    protected $hidden = [
+        'user_pass',
+    ];
 	public $timestamps = false;
 	public $dates = ['user_registered'];
 
@@ -50,7 +52,7 @@ class WpUser extends Model implements AuthenticatableContract, AuthorizableContr
 			$model->user_registered = Carbon::now()->toDateTimeString();
         });
 		static::created(function($model) {
-			wp_update_user(array(
+			wp_update_user((object) array(
 				'ID'=> $model->ID,
 				'role'=>'subscriber'
 			));

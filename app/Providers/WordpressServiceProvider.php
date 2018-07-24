@@ -1,11 +1,12 @@
 <?php namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
+
+
 class WordpressServiceProvider extends ServiceProvider
 {
 
 	/** @var \App\Helpers\LumenHelper $lumenHelper **/
 	/** @var \App\Helpers\WpHelper $wpHelper **/
-
 	private $wpHelper, $lumenHelper, $absolutePath;
 
 	/**
@@ -108,7 +109,7 @@ class WordpressServiceProvider extends ServiceProvider
 	    $this->wpHelper->addMetaBox(
 		    'example_menu_meta_box',
 		    'Wp-Lumen',
-		    function ( $object, $arguments){
+		    function($object, $arguments){
 			    $this->lumenHelper
 				    ->response($this->app->call( '\App\Http\Controllers\ExampleMetaBoxController@menuMetaBox', compact('object', 'arguments')))
 				    ->sendContent();
@@ -118,8 +119,6 @@ class WordpressServiceProvider extends ServiceProvider
 		    'default',
 		    2
 	    );
-
-
 
 	    /** Add Dashboard Widget **/
 	    $this->wpHelper
@@ -138,7 +137,7 @@ class WordpressServiceProvider extends ServiceProvider
 //            ->addRestRoute('wp-lumen/api/v1', '/test', array(
 //                'methods'  => ['get'],
 //                'callback' => function(){
-//                    return $this->app->call( '\App\Http\Controllers\ExampleWpRestRouteController@get');
+//                    return $this->app->call('\App\Http\Controllers\ExampleWpRestRouteController@get');
 //                },
 //            ));
 
@@ -153,7 +152,7 @@ class WordpressServiceProvider extends ServiceProvider
 					    ->response($this->lumenHelper->view('admin-intro'))
 					    ->sendContent();
 			    },
-			    'read'
+			    'manage_options'
 		    )
 		    ->addAdminSubPanel(
 			    'lumen_page',
@@ -161,11 +160,11 @@ class WordpressServiceProvider extends ServiceProvider
 			    'WpPost Demo',
 			    'WpPost Demo',
 			    function(){
-				    $this->lumenHelper
-					    ->response($this->app->call( '\App\Http\Controllers\ExampleAdminController@template'))
-					    ->sendContent();
+                    $this->lumenHelper
+                        ->response($this->app->call( '\App\Http\Controllers\ExampleAdminController@template'))
+                        ->sendContent();
 			    },
-			    'read'
+			    'manage_options'
 		    )->addAdminSubPanel(
 			    'lumen_page',
 			    'lumen_settings',
@@ -176,9 +175,8 @@ class WordpressServiceProvider extends ServiceProvider
 					    ->response($this->app->call( '\App\Http\Controllers\SettingsController@template'))
 					    ->sendContent();
 			    },
-			    'read'
+			    'manage_options'
 		    );
-
 
 	    /** Add CSS & Scripts **/
 	    $this->wpHelper
@@ -196,15 +194,6 @@ class WordpressServiceProvider extends ServiceProvider
 			    '1.0.0',
 			    true
 		    );
-
-    }
-
-	/**
-	 * Boot the service providers
-	 */
-	public function boot(){
-
-
 
     }
 }

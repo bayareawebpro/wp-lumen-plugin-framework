@@ -1,52 +1,72 @@
 <script>
-import axios from "axios"
 export default {
 	name: 'lumen-auth-login',
-	props: ['auth_user'],
+	props: ['user'],
 	data() {
 		return {
-			user:{
-				user_email: 'test@nowhere.com',
-				user_pass: 'test@nowhere.com'
+			form:{
+				user_email: '',
+				user_pass: ''
 			},
-			errors: {}
+			errors: {},
+            loading: false,
+			account: this.user
 		}
 	},
-	mounted() {
+    created() {
 		console.log('Lumen Auth Login Component Mounted.')
+		if(this.account){
+            this.redirect()
+		}
 	},
 	methods: {
-		submitLogin(event){
-			this.errors = {}
-			axios
-				.post('/lumen/api/auth/login', this.user)
-				.then((response) => {
-                    this.redirectHome()
-				})
-				.catch((error)  => {
-					if(error.response && error.response.data){
-                        this.errors = error.response.data
-					}
-				})
+        serverError(){
+            alert('Whoops, the server encountered an error processing the request.  Please try again.')
+        },
+		redirect(){
+            window.location.replace("/")
 		},
-		redirectHome(){
-			window.location.replace("/")
+		submitLogin(){
+			this.errors = {}
+			this.loading = true
+			this.$http
+				.post('/lumen/api/auth/login', this.form)
+                .then((response) => {
+                    this.loading = false
+                    if(typeof(response.data) !== 'undefined'){
+                        this.account = response.data.user
+                        this.redirect()
+                    }else{
+                        console.info(response)
+                        this.serverError()
+                    }
+                })
+                .catch((error)  => {
+                    this.loading = false
+                    if(typeof(error.response.data) !== 'undefined'){
+                        this.errors = error.response.data
+                    }else{
+                        console.error(error)
+                        this.serverError()
+                    }
+                })
 		}
 	}
 }
 </script>
-<style lang="sass">
+<style lang="sass" scoped>
+@import '../sass/forms'
 </style>
 <template>
 	<div class="vue-component">
-		<div v-if="user.ID">
-			Welcome back, {{ user.display_name }}
+		<div v-if="account">
+			<img src="/wp-admin/images/wpspin_light-2x.gif"/> Redirecting...
 		</div>
-		<form v-else class="form-horizontal" v-on:submit.prevent="submitLogin">
-			<div class="control-group" v-bind:class="{ 'has-error': errors.user_email }">
+		<form v-else class="form-horizontal" @submit.prevent="submitLogin">
+			<div class="control-group" :class="{ 'has-error': errors.user_email }">
 				<label class="control-label" for="user_email">E-mail</label>
 				<div class="controls">
-					<input type="text" name="user_email" v-model="user.user_email" placeholder="" class="form-control">
+					<input type="text" name="user_email" id="user_email" v-model="form.user_email" placeholder="you@somewhere.com" class="form-control" autocomplete="email">
 					<div class="help-block" v-if="errors">
 						<ul class="list-unstyled">
 							<li v-for="error in errors.user_email">
@@ -56,10 +76,10 @@ export default {
 					</div>
 				</div>
 			</div>
-			<div class="control-group" v-bind:class="{ 'has-error': errors.user_pass }">
+			<div class="control-group" :class="{ 'has-error': errors.user_pass }">
 				<label class="control-label" for="user_pass">Password</label>
 				<div class="controls" v-model="user">
-					<input type="password" name="user_pass" v-model="user.user_pass" placeholder="" class="form-control">
+					<input type="password" name="user_pass" v-model="form.user_pass" placeholder="XXX" class="form-control" autocomplete="password">
 					<div class="help-block" v-if="errors">
 						<ul class="list-unstyled">
 							<li v-for="error in errors.user_pass">
@@ -71,7 +91,8 @@ export default {
 			</div>
 			<div class="control-group">
 				<div class="controls">
-					<button type="submit" class="btn btn-success" data-loading-text="Authenticating...">Login</button>
+					<button type="submit" class="btn btn-success" :disabled="loading">Login</button>
+					<img src="/wp-admin/images/wpspin_light-2x.gif" v-if="loading"/>
 				</div>
 			</div>
 		</form>

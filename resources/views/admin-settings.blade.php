@@ -5,16 +5,14 @@
 @endsection
 @section('content')
 
-
-    <form method="post">
-        <input type="hidden" name="action" value="add">
-        <input type="text" name="key" placeholder="key">
-        <input type="text" name="value" placeholder="value">
-        <button type="submit" class="button button-primary">Save</button>
-    </form>
-
-    <br>
-
+<form method="post">
+    <input type="hidden" name="action" value="add"/>
+    <input type="hidden" name="_token" value="{{ wpLumen()->csrf() }}"/>
+    <input type="text" name="key" placeholder="key"/>
+    <input type="text" name="value" placeholder="value"/>
+    <button type="submit" class="button button-primary">Save</button>
+</form>
+<br>
 <table class="wp-list-table widefat striped">
     <thead>
     <tr>
@@ -34,12 +32,14 @@
             </td>
             <td>
                 <form method="post" style="display: inline">
+                    <input type="hidden" name="_token" value="{{ wpLumen()->csrf() }}"/>
                     <input type="hidden" name="action" value="update">
                     <input type="hidden" name="key" value="{{ $key }}">
                     <input type="text" name="value" value="{{ $value }}" placeholder="value">
                     <button type="submit" class="button button-primary" onclick="confirm('Are you sure you want to update this setting?')">Update</button>
                 </form>
                 <form method="post" style="display: inline">
+                    <input type="hidden" name="_token" value="{{ wpLumen()->csrf() }}"/>
                     <input type="hidden" name="key" value="{{ $key }}">
                     <input type="hidden" name="action" value="forget">
                     <button type="submit" class="button button-default" onclick="confirm('Are you sure you want to remove this setting?')">Delete</button>
@@ -48,6 +48,6 @@
         </tr>
     @endforeach
     </tbody>
-    </table>
+</table>
 
 @endsection

@@ -3,6 +3,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Helpers\WpHelper;
 use App\Helpers\LumenHelper;
 use App\Models\JSON;
+use Laravel\Lumen\Application;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -10,13 +11,14 @@ class AppServiceProvider extends ServiceProvider
      * @var $lumenHelper \App\Helpers\LumenHelper
      * @var $app \Laravel\Lumen\Application
      */
-    protected $lumenHelper, $app;
+    protected $lumenHelper, $wpHelper, $app;
 
-    public function __construct($app)
+    public function __construct(Application $app)
     {
         parent::__construct($app);
         $this->app = $app;
         $this->lumenHelper = null;
+        $this->wpHelper = null;
     }
 
 
@@ -58,7 +60,14 @@ class AppServiceProvider extends ServiceProvider
 
 
         $this->lumenHelper = $this->app->make('lumenHelper');
+        $this->wpHelper = $this->app->make('wpHelper');
         $this->lumenHelper->loadConfigurations();
+
+
+        $this->app->make('view')->share('lumenHelper', $this->lumenHelper);
+        $this->app->make('view')->share('wpHelper', $this->wpHelper);
+
+
         /** Register WpHelper **/
         $this->app
             ->singleton('settings', function(){

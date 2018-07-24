@@ -10,7 +10,6 @@ class DebugBarWordpressDbCollector extends DataCollector implements Renderable, 
 
 	public function __construct()
 	{
-
 		global $wpdb;
 		$this->wpdb = $wpdb;
 	}
@@ -19,8 +18,6 @@ class DebugBarWordpressDbCollector extends DataCollector implements Renderable, 
 	{
 		$queries = array();
 		$totalExecTime = 0;
-
-
 		if(count($this->wpdb->queries)){
 			foreach ($this->wpdb->queries as $q) {
 				list($query, $duration, $caller) = $q;
@@ -31,7 +28,6 @@ class DebugBarWordpressDbCollector extends DataCollector implements Renderable, 
 				);
 				$totalExecTime += $duration;
 			}
-
 			return array(
 				'nb_statements' => count($queries),
 				'accumulated_duration' => $totalExecTime,

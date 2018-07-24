@@ -1,17 +1,21 @@
 <?php namespace App\Utilities;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 class UnInstall{
 
-    protected $this;
+    /**
+     * @var $app \Laravel\Lumen\Application
+     * @var $config \Illuminate\Config\Repository
+     * @var $artisan \Illuminate\Contracts\Console\Kernel
+     * @var $schema \Illuminate\Database\Schema\Builder
+     */
+    protected $app, $config, $artisan, $schema;
 
     /**
      * Class Initialization called by Hook (Requires Static Method)
-     * @return UnInstall
+     * @return self
      */
     public static function init()
     {
+        putenv('APP_ENV=staging');
         return new self();
     }
 
@@ -20,7 +24,10 @@ class UnInstall{
      */
     public function __construct()
     {
-        $this->app = \App\Helpers\LumenHelper::plugin()->config();
+        $this->app = \App\Helpers\LumenHelper::plugin();
+        $this->config = $this->app->make('config');
+        $this->artisan = $this->app->make(\Illuminate\Contracts\Console\Kernel::class);
+        $this->schema = $this->app->make('db')->getSchemaBuilder();
         $this->schema();
         $this->data();
     }
@@ -28,18 +35,18 @@ class UnInstall{
     /**
      * Modify Database Schema
      */
-    private function schema()
+    public function schema()
     {
-
-//	    Artisan::call('migrate:rollback');
-//	    Schema::dropIfExists('migrations');
-
+        if($this->config->get('session.driver', 'file') === 'database'){
+            $this->artisan->call('migrate:reset');
+            $this->schema->dropIfExists($this->config->get('database.migrations'));
+        }
     }
 
     /**
      * Process Data
      */
-    private function data()
+    public function data()
     {
 
     }

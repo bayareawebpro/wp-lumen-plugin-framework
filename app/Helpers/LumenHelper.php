@@ -1,6 +1,7 @@
 <?php namespace App\Helpers;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Bus\Dispatcher;
+
 class LumenHelper
 {
     /** @var $app \Laravel\Lumen\Application */
@@ -74,12 +75,34 @@ class LumenHelper
     }
 
     /**
-     * Get Lumen App
+     * Get Session
      * @return \Illuminate\Session\SessionServiceProvider
      */
     public function session()
     {
-        return $this->app->get('session.store');
+        return $this->app->get('request')->session();
+    }
+    /**
+     * Get CSRF Token
+     * @return string
+     */
+    public function csrf()
+    {
+        return $this->app->get('request')->session()->token();
+    }
+
+    /**
+     * Validate CSRF Token
+     * @throws \Exception
+     */
+    public function validateCSRF(){
+        $request = $this->request();
+        if(!$request->filled('_token') || $request->get('_token') !== $request->session()->token()){
+            throw new \Illuminate\Session\TokenMismatchException();
+        }else{
+            $request->session()->regenerateToken();
+            $request->session()->save();
+        }
     }
 
     /**

@@ -28,14 +28,11 @@ class WpPost extends Model {
 	 * @return string
 	 */
 	public function getPermalinkAttribute(){
-
 		$parent = $this;
 		$segments = new Collection();
-
 		do{
 			$segments->push($parent->post_name);
 		}while($parent = $parent->parent);
-
 		return url($segments->reverse()->implode('/'));
 	}
 
@@ -143,9 +140,7 @@ class WpPost extends Model {
 	 * @return bool
 	 */
 	public function detachTaxonomy($taxonomy_id){
-
 		$query = $this->taxonomy()->getParent()->where('object_id', $this->ID)->where('term_taxonomy_id', $taxonomy_id);
-
 		if($query->exists()){
 			return $query->delete();
 		}

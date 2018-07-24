@@ -1,8 +1,13 @@
 //VUE
 import Vue from 'vue'
-
+import axios from 'axios'
+Vue.prototype.$http = axios.create({
+    headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+    }
+});
 //Mount
-let LumenContainer = document.getElementById("lumen_example");
+let LumenContainer = document.getElementById("vue_wrapper");
 if(LumenContainer !== null) {
 	let LumenExample = new Vue({
 		components: {

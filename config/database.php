@@ -25,7 +25,7 @@ return [
     |
     */
 
-    'default' => 'mysql',
+    'default' => 'wp',
 
     /*
     |--------------------------------------------------------------------------
@@ -43,7 +43,7 @@ return [
     |
     */
     'connections' => [
-        'mysql' => \App\Helpers\WpHelper::getWpDatabaseConnection(),
+        'wp' => \App\Helpers\WpHelper::getWpDatabaseConnection(),
     ],
 
     /*

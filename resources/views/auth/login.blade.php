@@ -1,1 +1,4 @@
-<lumen-auth-login :auth_user="{{ json_encode($user) }}"></lumen-auth-login>
+@extends('vue-wrapper')
+@section('content')
+    <lumen-auth-login :user="{{ json_encode($user) }}"></lumen-auth-login>
+@endsection
