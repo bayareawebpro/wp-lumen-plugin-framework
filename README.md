@@ -3,7 +3,7 @@
 This repository is an example of how to integrate Lumen Framework within a Wordpress Plugin. 
 
 ### Note: 
-Development of this repository has come to an end. But you are free to fork it and maintain your own version.
+Development of this repository has come to an end. But you are welcome to fork it and maintain your own version.
 
 ##### A Laravel Inspired Wordpress Plugin Framework built with Lumen Framework
 
