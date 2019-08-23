@@ -7,7 +7,7 @@ Development of this repository has come to an end. But you are welcome to fork i
 
 ##### A Laravel Inspired Wordpress Plugin Framework built with Lumen Framework
 
-WP Lumen Plugin Framework provides an architecture that allows rapid development of Wordpress plugins where speed and dexterity is preferred over native Wordpress methods. This codebase is built with Laravel's "Lumen" micro-framework.  Help WP Lumen Plugin Framework's development by contributing to the repository and reporting problems encountered.
+WP Lumen Plugin Framework provides an architecture that allows rapid development of Wordpress plugins where speed and dexterity is preferred over native Wordpress methods. This codebase is built with Laravel's "Lumen" micro-framework. 
 
 ![](https://cdn.rawgit.com/bayareawebpro/wp-lumen-plugin-framework/60a708a9/resources/assets/screenshots/preview.png)
 
