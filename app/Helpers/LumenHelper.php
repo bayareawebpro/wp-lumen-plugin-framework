@@ -60,8 +60,9 @@ class LumenHelper
      */
     function loadConfigurations()
     {
-        foreach ($this->app->get('files')->files(realpath($this->base_path('config'))) as $configFile) {
-            $this->app->configure($configFile->getBasename('.php'));
+        $files = array_diff(scandir( $this->base_path('config') ), array('.', '..'));
+        foreach ( $files as $configFile) {
+            $this->app->configure(  pathinfo($configFile, PATHINFO_FILENAME)  );
         }
     }
 
