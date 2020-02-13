@@ -56,7 +56,8 @@ class LumenHelper
 
 
     /**
-     * Load Configurations. @return void
+     * Load Configurations. 
+     * @return void
      */
     function loadConfigurations()
     {
