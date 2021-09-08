@@ -32,11 +32,5 @@ http://composer.org
 Once you have run the composer installer, upload and "Activate" the plugin in your Wordpress installation.
 
 ## Documentation
-
-In-Progress, please bookmark the Wiki, I will be adding new How-To's when possible.
-https://github.com/bayareawebpro/wp-lumen-plugin-framework/wiki
-
-Api Docs: https://cdn.rawgit.com/bayareawebpro/wp-lumen-plugin-framework/99bc7e1c/_docs/build/index.html
-
-## Slack Chat
-https://join.slack.com/t/wplumen/shared_invite/enQtMzAwNDgwMDQzODI3LWFlOTJmMWMxYjA2ZTE0YjRhMDk0N2QwZDJjZWZmYTEzODcxZWRiZWVlODQwNTE1ZjgxZjAzMjcyNzg3NGJjNjg
+- https://github.com/bayareawebpro/wp-lumen-plugin-framework/wiki
+- https://cdn.rawgit.com/bayareawebpro/wp-lumen-plugin-framework/99bc7e1c/_docs/build/index.html
